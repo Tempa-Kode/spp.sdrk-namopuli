@@ -29,3 +29,12 @@ Route::prefix('/siswa')->middleware('auth')->group(function () {
     Route::put('/{id}', [App\Http\Controllers\SiswaController::class, 'update'])->name('siswa.update');
     Route::delete('/{id}', [App\Http\Controllers\SiswaController::class, 'destroy'])->name('siswa.destroy');
 });
+
+Route::prefix('/guru-pegawai')->middleware('auth')->group(function () {
+    Route::get('/', [App\Http\Controllers\GuruPegawaiController::class, 'index'])->name('guru-pegawai.index');
+    Route::get('/create', [App\Http\Controllers\GuruPegawaiController::class, 'create'])->name('guru-pegawai.create');
+    Route::post('/', [App\Http\Controllers\GuruPegawaiController::class, 'store'])->name('guru-pegawai.store');
+    Route::get('/{id}/edit', [App\Http\Controllers\GuruPegawaiController::class, 'edit'])->name('guru-pegawai.edit');
+    Route::put('/{id}', [App\Http\Controllers\GuruPegawaiController::class, 'update'])->name('guru-pegawai.update');
+    Route::delete('/{id}', [App\Http\Controllers\GuruPegawaiController::class, 'destroy'])->name('guru-pegawai.destroy');
+});
