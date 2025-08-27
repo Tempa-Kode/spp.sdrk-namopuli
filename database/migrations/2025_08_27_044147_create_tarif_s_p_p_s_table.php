@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tarif_spp', function (Blueprint $table) {
             $table->id();
-            $table->year('tahun')->unique();
+            $table->year('tahun');
             $table->integer('tingkat_kelas');
             $table->decimal('nominal', 12, 2);
             $table->timestamps();

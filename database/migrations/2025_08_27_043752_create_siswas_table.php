@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('siswa', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('kelas_id')->constrained('kelas')->onDelete('cascade');
+            $table->foreignId('kelas_id')->nullable()->constrained('kelas')->onDelete('cascade');
             $table->string('nisn', 20)->unique();
             $table->string('nama_siswa', 100);
             $table->enum('jenkel', ['L', 'P']);
