@@ -23,4 +23,9 @@ Route::prefix('/profil')->middleware('auth')->group(function () {
 
 Route::prefix('/siswa')->middleware('auth')->group(function () {
     Route::get('/', [App\Http\Controllers\SiswaController::class, 'index'])->name('siswa.index');
+    Route::get('/create', [App\Http\Controllers\SiswaController::class, 'create'])->name('siswa.create');
+    Route::post('/', [App\Http\Controllers\SiswaController::class, 'store'])->name('siswa.store');
+    Route::get('/{id}/edit', [App\Http\Controllers\SiswaController::class, 'edit'])->name('siswa.edit');
+    Route::put('/{id}', [App\Http\Controllers\SiswaController::class, 'update'])->name('siswa.update');
+    Route::delete('/{id}', [App\Http\Controllers\SiswaController::class, 'destroy'])->name('siswa.destroy');
 });
