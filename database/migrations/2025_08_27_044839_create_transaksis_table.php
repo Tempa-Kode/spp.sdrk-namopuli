@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pengguna', function (Blueprint $table) {
+        Schema::create('transaksi', function (Blueprint $table) {
             $table->id();
-            $table->string('nama', 100);
-            $table->string('email', 100)->unique();
-            $table->string('password');
-            $table->enum('role', ['admin', 'petugas', 'wali']);
+            $table->foreignId('tagihan_id')->constrained('tagihan_spp')->onDelete('cascade');
+            $table->decimal('jumlah_bayar', 12, 2);
+            $table->timestamp('tanggal_bayar');
+            $table->string('snap_token', 255)->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pengguna');
+        Schema::dropIfExists('transaksi');
     }
 };

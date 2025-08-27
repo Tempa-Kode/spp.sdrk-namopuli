@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pengguna', function (Blueprint $table) {
+        Schema::create('tarif_spp', function (Blueprint $table) {
             $table->id();
-            $table->string('nama', 100);
-            $table->string('email', 100)->unique();
-            $table->string('password');
-            $table->enum('role', ['admin', 'petugas', 'wali']);
+            $table->year('tahun')->unique();
+            $table->integer('tingkat_kelas');
+            $table->decimal('nominal', 12, 2);
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pengguna');
+        Schema::dropIfExists('tarif_spp');
     }
 };
