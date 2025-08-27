@@ -3,7 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Kelas extends Model
 {
@@ -14,9 +15,9 @@ class Kelas extends Model
         'wali_kelas_id',
     ];
 
-    public function waliKelas() : HasOne
+    public function waliKelas()
     {
-        return $this->hasOne(GuruPegawai::class, 'wali_kelas_id');
+        return $this->belongsTo(GuruPegawai::class, 'wali_kelas_id');
     }
 
     public function siswa()

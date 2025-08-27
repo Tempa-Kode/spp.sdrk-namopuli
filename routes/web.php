@@ -38,3 +38,12 @@ Route::prefix('/guru-pegawai')->middleware('auth')->group(function () {
     Route::put('/{id}', [App\Http\Controllers\GuruPegawaiController::class, 'update'])->name('guru-pegawai.update');
     Route::delete('/{id}', [App\Http\Controllers\GuruPegawaiController::class, 'destroy'])->name('guru-pegawai.destroy');
 });
+
+Route::prefix('/kelas')->middleware('auth')->group(function () {
+    Route::get('/', [App\Http\Controllers\KelasController::class, 'index'])->name('kelas.index');
+    Route::get('/create', [App\Http\Controllers\KelasController::class, 'create'])->name('kelas.create');
+    Route::post('/', [App\Http\Controllers\KelasController::class, 'store'])->name('kelas.store');
+    Route::get('/{kelas}/edit', [App\Http\Controllers\KelasController::class, 'edit'])->name('kelas.edit');
+    Route::put('/{kelas}', [App\Http\Controllers\KelasController::class, 'update'])->name('kelas.update');
+    Route::delete('/{kelas}', [App\Http\Controllers\KelasController::class, 'destroy'])->name('kelas.destroy');
+});
