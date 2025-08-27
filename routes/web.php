@@ -47,3 +47,12 @@ Route::prefix('/kelas')->middleware('auth')->group(function () {
     Route::put('/{kelas}', [App\Http\Controllers\KelasController::class, 'update'])->name('kelas.update');
     Route::delete('/{kelas}', [App\Http\Controllers\KelasController::class, 'destroy'])->name('kelas.destroy');
 });
+
+Route::prefix('/tarif-spp')->middleware('auth')->group(function () {
+    Route::get('/', [App\Http\Controllers\TarifSppController::class, 'index'])->name('tarif-spp.index');
+    Route::get('/create', [App\Http\Controllers\TarifSppController::class, 'create'])->name('tarif-spp.create');
+    Route::post('/', [App\Http\Controllers\TarifSppController::class, 'store'])->name('tarif-spp.store');
+    Route::get('/{tarifSpp}/edit', [App\Http\Controllers\TarifSppController::class, 'edit'])->name('tarif-spp.edit');
+    Route::put('/{tarifSpp}', [App\Http\Controllers\TarifSppController::class, 'update'])->name('tarif-spp.update');
+    Route::delete('/{tarifSpp}', [App\Http\Controllers\TarifSppController::class, 'destroy'])->name('tarif-spp.destroy');
+});
