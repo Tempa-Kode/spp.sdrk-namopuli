@@ -66,3 +66,9 @@ Route::prefix('/tagihan-spp')->middleware('auth')->group(function () {
     Route::patch('/{tagihanSpp}/status', [App\Http\Controllers\TagihanSppController::class, 'updateStatus'])->name('tagihan-spp.update-status');
     Route::delete('/{tagihanSpp}', [App\Http\Controllers\TagihanSppController::class, 'destroy'])->name('tagihan-spp.destroy');
 });
+
+Route::prefix('/reports')->middleware('auth')->group(function () {
+    Route::get('/tagihan-spp', [App\Http\Controllers\ReportController::class, 'tagihanSpp'])->name('reports.tagihan-spp');
+    Route::get('/tagihan-spp/preview', [App\Http\Controllers\ReportController::class, 'previewTagihanSpp'])->name('reports.tagihan-spp.preview');
+    Route::get('/tagihan-spp/pdf', [App\Http\Controllers\ReportController::class, 'generateTagihanSppPdf'])->name('reports.tagihan-spp.pdf');
+});
