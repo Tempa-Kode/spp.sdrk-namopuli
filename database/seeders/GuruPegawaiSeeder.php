@@ -33,8 +33,8 @@ class GuruPegawaiSeeder extends Seeder
                 $simpanGuruPegawai = GuruPegawai::create($data);
                 User::create([
                     'petugas_id' => $simpanGuruPegawai->id,
-                    'nama' => $record['1'],
-                    'password' => bcrypt($record['0']),
+                    'nama' => $record['0'],
+                    'password' => bcrypt($record['1']),
                     'role' => 'petugas',
                 ]);
             }
