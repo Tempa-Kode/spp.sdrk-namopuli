@@ -26,4 +26,9 @@ class Siswa extends Model
     {
         return $this->hasMany(TagihanSpp::class, 'siswa_id');
     }
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'siswa_id');
+    }
 }

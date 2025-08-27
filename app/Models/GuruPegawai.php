@@ -22,4 +22,9 @@ class GuruPegawai extends Model
     {
         return $this->hasOne(Kelas::class, 'wali_kelas_id');
     }
+
+    public function user() : HasOne
+    {
+        return $this->hasOne(User::class, 'petugas_id');
+    }
 }
