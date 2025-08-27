@@ -56,3 +56,15 @@ Route::prefix('/tarif-spp')->middleware('auth')->group(function () {
     Route::put('/{tarifSpp}', [App\Http\Controllers\TarifSppController::class, 'update'])->name('tarif-spp.update');
     Route::delete('/{tarifSpp}', [App\Http\Controllers\TarifSppController::class, 'destroy'])->name('tarif-spp.destroy');
 });
+
+Route::prefix('/tagihan-spp')->middleware('auth')->group(function () {
+    Route::get('/', [App\Http\Controllers\TagihanSppController::class, 'index'])->name('tagihan-spp.index');
+    Route::post('/generate', [App\Http\Controllers\TagihanSppController::class, 'generateTagihan'])->name('tagihan-spp.generate');
+    Route::get('/create', [App\Http\Controllers\TagihanSppController::class, 'create'])->name('tagihan-spp.create');
+    Route::post('/', [App\Http\Controllers\TagihanSppController::class, 'store'])->name('tagihan-spp.store');
+    Route::get('/{tagihanSpp}', [App\Http\Controllers\TagihanSppController::class, 'show'])->name('tagihan-spp.show');
+    Route::get('/{tagihanSpp}/edit', [App\Http\Controllers\TagihanSppController::class, 'edit'])->name('tagihan-spp.edit');
+    Route::put('/{tagihanSpp}', [App\Http\Controllers\TagihanSppController::class, 'update'])->name('tagihan-spp.update');
+    Route::patch('/{tagihanSpp}/status', [App\Http\Controllers\TagihanSppController::class, 'updateStatus'])->name('tagihan-spp.update-status');
+    Route::delete('/{tagihanSpp}', [App\Http\Controllers\TagihanSppController::class, 'destroy'])->name('tagihan-spp.destroy');
+});
