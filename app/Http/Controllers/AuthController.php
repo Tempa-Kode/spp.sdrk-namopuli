@@ -31,11 +31,11 @@ class AuthController extends Controller
             $request->session()->regenerate();
             switch ($user->role) {
                 case 'admin':
-                    return redirect()->intended('/dashboard');
+                    return redirect()->route('dashboard.stackholder');
                 case 'petugas':
-                    return redirect()->intended('/dashboard');
+                    return redirect()->route('dashboard.stackholder');
                 case 'wali':
-                    return redirect()->intended('/');
+                    return redirect()->route('dashboard.wali');
                 default:
                     Auth::logout();
                     return back()->with('login_error', 'pengguna tidak dikenali.');

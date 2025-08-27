@@ -62,7 +62,7 @@ class DashboardController extends Controller
             ];
         }
 
-        return view('dashboard', compact(
+        return view('dashboard-stackholder', compact(
             'totalSiswa',
             'totalGuruPegawai',
             'totalKelas',
@@ -73,5 +73,10 @@ class DashboardController extends Controller
             'chartData',
             'currentMonth'
         ));
+    }
+
+    public function wali()
+    {
+        return view('dashboard-wali');
     }
 }
