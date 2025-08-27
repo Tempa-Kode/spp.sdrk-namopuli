@@ -22,6 +22,11 @@ class Siswa extends Model
         return $this->belongsTo(Kelas::class, 'kelas_id');
     }
 
+    public function getJenisKelaminLengkapAttribute()
+    {
+        return $this->jenkel == 'L' ? 'Laki-laki' : 'Perempuan';
+    }
+
     public function tagihanSpp()
     {
         return $this->hasMany(TagihanSpp::class, 'siswa_id');

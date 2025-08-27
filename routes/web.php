@@ -20,3 +20,7 @@ Route::prefix('/profil')->middleware('auth')->group(function () {
     Route::put('/update-profile', [App\Http\Controllers\ProfilController::class, 'updateProfile'])->name('profil.update');
     Route::put('/update-password', [App\Http\Controllers\ProfilController::class, 'updatePassword'])->name('profil.update.password');
 });
+
+Route::prefix('/siswa')->middleware('auth')->group(function () {
+    Route::get('/', [App\Http\Controllers\SiswaController::class, 'index'])->name('siswa.index');
+});
