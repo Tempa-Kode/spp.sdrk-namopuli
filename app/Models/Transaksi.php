@@ -17,6 +17,6 @@ class Transaksi extends Model
 
     public function tagihan()
     {
-        return $this->hasOne(TagihanSpp::class, 'tagihan_id');
+        return $this->belongsTo(TagihanSpp::class, 'tagihan_id');
     }
 }
