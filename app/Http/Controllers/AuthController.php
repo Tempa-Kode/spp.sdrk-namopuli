@@ -28,8 +28,9 @@ class AuthController extends Controller
 
         if ($user && Hash::check($credentials['password'], $user->password)) {
             Auth::login($user);
+            $data = Auth::user();
             $request->session()->regenerate();
-            switch ($user->role) {
+            switch ($data->role) {
                 case 'admin':
                     return redirect()->route('dashboard.stackholder');
                 case 'petugas':
@@ -53,6 +54,6 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect('/');
     }
 }
