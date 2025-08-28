@@ -18,6 +18,8 @@ Route::prefix('/profil')->middleware('auth')->group(function () {
     Route::get('/', [App\Http\Controllers\ProfilController::class, 'index'])->name('profil');
     Route::put('/update-profile', [App\Http\Controllers\ProfilController::class, 'updateProfile'])->name('profil.update');
     Route::put('/update-password', [App\Http\Controllers\ProfilController::class, 'updatePassword'])->name('profil.update.password');
+    Route::get('/siswa', [App\Http\Controllers\WaliController::class, 'profil'])->name('profil.siswa');
+    Route::put('/siswa/update-password', [App\Http\Controllers\WaliController::class, 'updatePassword'])->name('profil.siswa.update.password');
 });
 
 Route::prefix('/siswa')->middleware('auth')->group(function () {
