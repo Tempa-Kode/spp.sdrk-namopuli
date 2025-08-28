@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Siswa;
+use App\Models\TagihanSpp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -42,5 +43,14 @@ class WaliController extends Controller
         ]);
 
         return redirect()->route('profil.siswa')->with('success', 'Password berhasil diperbarui!');
+    }
+
+    public function tagihan()
+    {
+        $tagihan = TagihanSpp::where('siswa_id', Auth::user()->siswa->id)
+            ->with('siswa', 'tarif')
+            ->orderBy('bulan', 'desc')
+            ->get();
+        return view('tagihan-spp.wali.index', compact('tagihan'));
     }
 }
