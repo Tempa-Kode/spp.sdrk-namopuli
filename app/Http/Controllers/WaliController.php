@@ -53,4 +53,14 @@ class WaliController extends Controller
             ->get();
         return view('tagihan-spp.wali.index', compact('tagihan'));
     }
+
+    public function detailTagihan($id)
+    {
+        $tagihan = TagihanSpp::where('id', $id)
+            ->where('siswa_id', Auth::user()->siswa->id)
+            ->with('siswa', 'tarif', 'transaksi')
+            ->firstOrFail();
+            // dd($tagihan);
+        return view('tagihan-spp.wali.detail', compact('tagihan'));
+    }
 }
