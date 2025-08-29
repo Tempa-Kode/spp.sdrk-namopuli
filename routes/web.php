@@ -63,6 +63,7 @@ Route::prefix('/tagihan-spp')->middleware('auth')->group(function () {
     Route::post('/bayar', [App\Http\Controllers\PembayaranController::class, 'bayar'])->name('tagihan-spp.bayar');
     Route::put('/update-status/', [App\Http\Controllers\PembayaranController::class, 'updateStatus'])->name('tagihan-spp.update-status.pembayaran');
     Route::get('/detail/{id}', [App\Http\Controllers\WaliController::class, 'detailTagihan'])->name('tagihan-spp.wali.detail');
+    Route::get('/kuitansi/{id}', [App\Http\Controllers\PembayaranController::class, 'generateKuitansi'])->name('tagihan-spp.kuitansi');
     Route::get('/', [App\Http\Controllers\TagihanSppController::class, 'index'])->name('tagihan-spp.index');
     Route::post('/generate', [App\Http\Controllers\TagihanSppController::class, 'generateTagihan'])->name('tagihan-spp.generate');
     Route::get('/create', [App\Http\Controllers\TagihanSppController::class, 'create'])->name('tagihan-spp.create');

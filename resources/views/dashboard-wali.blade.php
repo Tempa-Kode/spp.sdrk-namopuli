@@ -14,10 +14,6 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="d-flex px-2 py-1">
-                            <div>
-                                <img src="{{ asset("assets/img/team-2.jpg") }}"
-                                    class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
-                            </div>
                             <div class="d-flex flex-column justify-content-center">
                                 <h6 class="mb-0 text-sm">{{ $dataSiswa->nama_siswa }}</h6>
                                 <p class="text-xs text-secondary mb-0">NISN: {{ $dataSiswa->nisn }}</p>
@@ -126,20 +122,6 @@
             </div>
         </div>
     </div>
-
-<!-- Chart Section -->
-<div class="col-12 mt-4">
-    <div class="card">
-        <div class="card-header pb-0">
-            <h6>Riwayat Pembayaran SPP (12 Bulan Terakhir)</h6>
-        </div>
-        <div class="card-body px-0 pt-0 pb-2">
-            <div class="chart">
-                <canvas id="chart-bars" class="chart-canvas" height="170"></canvas>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Tagihan Belum Bayar -->
 @if ($tagihanBelumBayar->count() > 0)
