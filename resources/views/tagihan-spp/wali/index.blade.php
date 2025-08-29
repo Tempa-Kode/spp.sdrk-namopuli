@@ -90,23 +90,18 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="align-middle text-center">
-                                            @if($item->status == 'lunas')
-                                                <a href="#" class="btn btn-sm btn-outline-primary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Download Invoice">
-                                                    <i class="fas fa-download me-1"></i> Download
-                                                </a>
-                                            @else
-                                                <a href="#" class="btn btn-sm btn-success font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Bayar">
-                                                    <i class="fas fa-money-bill-wave me-1"></i> Bayar
-                                                </a>
-                                            @endif
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <a href="{{ route('tagihan-spp.wali.detail', $item->id) }}" class="btn btn-sm btn-outline-success">Detail</a>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
-
                 @else
                     <div class="text-center py-5">
                         <h5 class="text-muted">Belum Ada Tagihan</h5>

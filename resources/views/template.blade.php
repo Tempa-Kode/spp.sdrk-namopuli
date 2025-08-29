@@ -22,6 +22,7 @@
     <link href="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-2.3.3/fh-4.0.3/r-3.0.6/sc-2.4.3/datatables.min.css"
         rel="stylesheet" integrity="sha384-q8xN1tfITXcxdT1l6HMZLc9T7nnCiPJDj/IGsPLlKw47I5bO9PupoYYRIicLIi+B"
         crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
     <!-- Nepcha Analytics (nepcha.com) -->
     <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
     <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
@@ -85,6 +86,7 @@
     <script src="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-2.3.3/fh-4.0.3/r-3.0.6/sc-2.4.3/datatables.min.js"
         integrity="sha384-LtEKbZknqXqdIrquDzxmcL32nBNaUhz7ounatXGWZGHfz/oZogHg1EidEwTlvUsP" crossorigin="anonymous">
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $('.datatable').DataTable();
@@ -103,6 +105,7 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="{{ asset("assets/js/soft-ui-dashboard.min.js?v=1.1.0") }}"></script>
+    @stack('scripts')
 </body>
 
 </html>
