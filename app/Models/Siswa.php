@@ -12,6 +12,7 @@ class Siswa extends Model
         'nisn',
         'nama_siswa',
         'jenkel',
+        'nomor_telp_orangtua',
         'tempat_lahir',
         'tanggal_lahir',
         'agama',

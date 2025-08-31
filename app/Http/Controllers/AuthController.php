@@ -26,6 +26,11 @@ class AuthController extends Controller
             $query->where('nuptk', $credentials['kridensial']);
         })->first();
 
+        // jika user tidak ditemukan menggunakan NISN/NUPTK, maka menggunakan email
+        if (!$user && filter_var($credentials['kridensial'], FILTER_VALIDATE_EMAIL)) {
+            $user = User::where('email', $credentials['kridensial'])->first();
+        }
+
         if ($user && Hash::check($credentials['password'], $user->password)) {
             Auth::login($user);
             $data = Auth::user();

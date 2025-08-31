@@ -139,6 +139,17 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="nomor_telp_orangtua" class="form-label">No Telp Orang Tua</label>
+                                <input type="text" class="form-control @error("nomor_telp_orangtua") is-invalid @enderror"
+                                    id="nomor_telp_orangtua" name="nomor_telp_orangtua"
+                                    value="{{ old("nomor_telp_orangtua") }}">
+                                @error("nomor_telp_orangtua")
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
                     </div>
 
                     <div class="d-flex justify-content-end">

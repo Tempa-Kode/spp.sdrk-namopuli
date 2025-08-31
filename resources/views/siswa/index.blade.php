@@ -92,6 +92,8 @@
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                                     width="15%">Kelas</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                                    width="10%">No Telp Orang Tua</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                                     width="15%">Jenis Kelamin</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                                     width="25%">Aksi</th>
@@ -114,6 +116,7 @@
                                         <span class="text-secondary text-xs font-weight-bold">{{ $item->nisn }}</span>
                                     </td>
                                     <td class="text-center">{{ $item->kelas->nama_kelas ?? "-" }}</td>
+                                    <td class="text-center">{{ $item->nomor_telp_orangtua ?? "-" }}</td>
                                     <td class="text-center">
                                         <span
                                             class="badge badge-sm {{ $item->jenkel == "L" ? "bg-gradient-primary" : "bg-gradient-secondary" }}">
