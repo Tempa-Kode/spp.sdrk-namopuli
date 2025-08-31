@@ -20,7 +20,7 @@
                     <div class="mb-3">
                         <label for="nama" class="form-label">Nama</label>
                         <input type="text" class="form-control @error("nama") is-invalid @enderror" id="nama"
-                            name="nama" value="{{ old("nama", $data->nama) }}" required>
+                            name="nama" value="{{ old("nama", $data->nama ?? "") }}" required>
                         @error("nama")
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -28,7 +28,7 @@
                     <div class="mb-3">
                         <label for="nuptk" class="form-label">NUPTK</label>
                         <input type="text" class="form-control @error("nuptk") is-invalid @enderror" id="nuptk"
-                            name="nuptk" value="{{ old("nuptk", $data->nuptk) }}" required>
+                            name="nuptk" value="{{ old("nuptk", $data->nuptk ?? "") }}" required>
                         @error("nuptk")
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -60,7 +60,7 @@
                     <div class="mb-3">
                         <label for="tempat_lahir" class="form-label">Tempat Lahir</label>
                         <input type="text" class="form-control @error("tempat_lahir") is-invalid @enderror"
-                            id="tempat_lahir" name="tempat_lahir" value="{{ old("tempat_lahir", $data->tempat_lahir) }}"
+                            id="tempat_lahir" name="tempat_lahir" value="{{ old("tempat_lahir", $data->tempat_lahir ?? "") }}"
                             required>
                         @error("tempat_lahir")
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -70,7 +70,7 @@
                         <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
                         <input type="date" class="form-control @error("tanggal_lahir") is-invalid @enderror"
                             id="tanggal_lahir" name="tanggal_lahir"
-                            value="{{ old("tanggal_lahir", $data->tanggal_lahir) }}" required>
+                            value="{{ old("tanggal_lahir", $data->tanggal_lahir ?? "") }}" required>
                         @error("tanggal_lahir")
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -78,7 +78,7 @@
                     <div class="mb-3">
                         <label for="jabatan" class="form-label">Jabatan</label>
                         <input type="text" class="form-control @error("jabatan") is-invalid @enderror" id="jabatan"
-                            name="jabatan" value="{{ old("jabatan", $data->jabatan) }}" required>
+                            name="jabatan" value="{{ old("jabatan", $data->jabatan ?? "") }}" required>
                         @error("jabatan")
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
