@@ -165,7 +165,7 @@
                                         <span class="badge badge-sm bg-gradient-warning">Belum Bayar</span>
                                     </td>
                                     <td class="align-middle">
-                                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
+                                        <a href="{{ route('tagihan-spp.wali.detail', $tagihan->id) }}" class="text-secondary font-weight-bold text-xs"
                                             data-toggle="tooltip" data-original-title="Bayar sekarang">
                                             Bayar
                                         </a>
