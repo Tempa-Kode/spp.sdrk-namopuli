@@ -40,6 +40,8 @@ class AuthController extends Controller
                     return redirect()->route('dashboard.stackholder');
                 case 'petugas':
                     return redirect()->route('dashboard.stackholder');
+                case 'wali_kelas':
+                    return redirect()->route('dashboard.stackholder');
                 case 'wali':
                     return redirect()->route('dashboard.wali');
                 default:
