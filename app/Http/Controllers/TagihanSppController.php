@@ -49,7 +49,11 @@ class TagihanSppController extends Controller
         $currentMonth = Carbon::now()->format('Y-m');
         $currentMonthTagihan = TagihanSpp::where('bulan', $currentMonth)->exists();
 
-        return view('tagihan-spp.index', compact('tagihanSpp', 'bulanList', 'kelasList', 'currentMonthTagihan', 'currentMonth'));
+        // check jumlah tagihan saat ini
+        $currentMonthTagihanCount = TagihanSpp::where('bulan', $currentMonth)->count();
+        $jumlahSiswa = Siswa::whereHas('kelas')->count(); // menghitung jumlah siswa
+
+        return view('tagihan-spp.index', compact('tagihanSpp', 'bulanList', 'kelasList', 'currentMonthTagihan', 'currentMonth', 'currentMonthTagihanCount', 'jumlahSiswa'));
     }
 
     /**
@@ -62,20 +66,23 @@ class TagihanSppController extends Controller
         ]);
 
         $bulan = $validated['bulan'];
-
-        // Cek apakah sudah ada tagihan untuk bulan ini
-        $existingTagihan = TagihanSpp::where('bulan', $bulan)->exists();
-
-        if ($existingTagihan) {
-            return back()->with('error', 'Tagihan untuk bulan ' . Carbon::createFromFormat('Y-m', $bulan)->format('F Y') . ' sudah ada.');
-        }
-
         try {
             $tahun = Carbon::createFromFormat('Y-m', $bulan)->year;
             $siswaList = Siswa::with('kelas')->get();
             $tagihanCreated = 0;
+            $skippedExisting = 0;
 
             foreach ($siswaList as $siswa) {
+                // Jika siswa sudah punya tagihan untuk bulan ini, lewati
+                $already = TagihanSpp::where('siswa_id', $siswa->id)
+                                     ->where('bulan', $bulan)
+                                     ->exists();
+
+                if ($already) {
+                    $skippedExisting++;
+                    continue;
+                }
+
                 // Cari tarif berdasarkan tahun dan tingkat kelas siswa
                 $tarif = TarifSPP::where('tahun', $tahun)
                                  ->where('tingkat_kelas', $siswa->kelas->tingkat_kelas ?? 0)
@@ -93,8 +100,15 @@ class TagihanSppController extends Controller
             }
 
             if ($tagihanCreated > 0) {
-                return back()->with('success', "Berhasil membuat {$tagihanCreated} tagihan SPP untuk bulan " . Carbon::createFromFormat('Y-m', $bulan)->format('F Y') . ".");
+                $message = "Berhasil membuat {$tagihanCreated} tagihan SPP untuk bulan " . Carbon::createFromFormat('Y-m', $bulan)->format('F Y') . ".";
+                if ($skippedExisting > 0) {
+                    $message .= " ({$skippedExisting} siswa sudah memiliki tagihan untuk bulan tersebut dan dilewati).";
+                }
+                return back()->with('success', $message);
             } else {
+                if ($skippedExisting > 0) {
+                    return back()->with('error', "Tidak ada tagihan yang dibuat. {$skippedExisting} siswa sudah memiliki tagihan untuk bulan tersebut. Pastikan juga ada tarif SPP untuk tahun ini.");
+                }
                 return back()->with('error', 'Tidak ada tagihan yang dibuat. Pastikan ada siswa aktif dan tarif SPP untuk tahun ini.');
             }
 
