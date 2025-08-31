@@ -41,15 +41,25 @@ class GuruPegawaiController extends Controller
             'tempat_lahir' => 'required|string|max:255',
             'tanggal_lahir' => 'required|date',
             'jabatan' => 'required|string|max:255',
+            'role' => 'required|in:admin,petugas,wali_kelas',
+            'email' => 'required|email|max:255|unique:pengguna,email'
         ]);
 
-        GuruPegawai::create([
+        $guruPegawai = GuruPegawai::create([
             'nama' => $request->nama,
             'nuptk' => $request->nuptk,
             'jenkel' => $request->jenkel,
             'tempat_lahir' => $request->tempat_lahir,
             'tanggal_lahir' => $request->tanggal_lahir,
             'jabatan' => $request->jabatan,
+        ]);
+
+        $guruPegawai->user()->create([
+            'petugas_id' => $guruPegawai->id,
+            'nama' => $guruPegawai->nama,
+            'email' => $request->email,
+            'password' => $request->nuptk ? bcrypt($request->nuptk) : bcrypt('password123'),
+            'role' => $request->role
         ]);
 
         return redirect()->route('guru-pegawai.index')->with('success', 'Data guru/pegawai berhasil ditambahkan!');
@@ -72,6 +82,7 @@ class GuruPegawaiController extends Controller
             'tempat_lahir' => 'required|string|max:255',
             'tanggal_lahir' => 'required|date',
             'jabatan' => 'required|string|max:255',
+            'role' => 'required|in:admin,petugas,wali_kelas'
         ]);
 
         $guruPegawai->update([
@@ -81,6 +92,11 @@ class GuruPegawaiController extends Controller
             'tempat_lahir' => $request->tempat_lahir,
             'tanggal_lahir' => $request->tanggal_lahir,
             'jabatan' => $request->jabatan,
+        ]);
+
+        $guruPegawai->user->update([
+            'email' => $request->email,
+            'role' => $request->role
         ]);
 
         return redirect()->route('guru-pegawai.index')->with('success', 'Data guru/pegawai berhasil diperbarui!');

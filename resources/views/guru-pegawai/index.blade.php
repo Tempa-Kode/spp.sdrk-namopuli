@@ -107,10 +107,12 @@
                                     width="12%">NUPTK</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                                     width="12%">Jenis Kelamin</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-                                    width="15%">Tempat, Tanggal Lahir</th>
+                                {{-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                                    width="15%">Tempat, Tanggal Lahir</th> --}}
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                                     width="16%">Jabatan</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                                    width="16%">Role</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                                     width="20%">Aksi</th>
                             </tr>
@@ -137,14 +139,17 @@
                                             {{ $item->jenis_kelamin_lengkap }}
                                         </span>
                                     </td>
-                                    <td class="text-center">
+                                    {{-- <td class="text-center">
                                         <span class="text-secondary text-xs">
                                             {{ $item->tempat_lahir }},
                                             {{ \Carbon\Carbon::parse($item->tanggal_lahir)->format("d/m/Y") }}
                                         </span>
-                                    </td>
+                                    </td> --}}
                                     <td class="text-center">
                                         <span class="badge badge-sm bg-gradient-success">{{ $item->jabatan }}</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge badge-sm bg-gradient-info text-capitalize">{{ $item->user->role }}</span>
                                     </td>
                                     <td class="text-center">
                                         <a href="{{ route("guru-pegawai.edit", $item->id) }}"

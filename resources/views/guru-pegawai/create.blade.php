@@ -112,6 +112,35 @@
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="role" class="form-label">Role <span
+                                        class="text-danger">*</span></label>
+                                <select name="role" id="role" class="form-control">
+                                    <option value="">Pilih Role</option>
+                                    <option value="admin" {{ old("role") == "admin" ? "selected" : "" }}>Admin</option>
+                                    <option value="petugas" {{ old("role") == "petugas" ? "selected" : "" }}>Petugas</option>
+                                    <option value="wali_kelas" {{ old("role") == "wali_kelas" ? "selected" : "" }}>Wali Kelas</option>
+                                </select>
+                                @error("role")
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email <span
+                                        class="text-danger">*</span></label>
+                                <input type="email" class="form-control @error("email") is-invalid @enderror"
+                                    id="email" name="email" value="{{ old("email") }}" required>
+                                @error("email")
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="d-flex justify-content-end">
                         <a href="{{ route("guru-pegawai.index") }}" class="btn btn-secondary me-2">Batal</a>
                         <button type="submit" class="btn btn-primary">
