@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TagihanSpp;
-use App\Models\Kelas;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Models\Kelas;
+use App\Models\TagihanSpp;
+use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
 
 class ReportController extends Controller
 {
@@ -36,7 +37,14 @@ class ReportController extends Controller
             'status' => 'nullable|in:belum_bayar,lunas',
         ]);
 
-        $query = TagihanSpp::with(['siswa.kelas', 'tarif']);
+        if(Auth::user()->role == 'wali_kelas'){
+            $query = TagihanSpp::with(['siswa.kelas', 'tarif'])
+                               ->whereHas('siswa', function($q) {
+                                   $q->where('kelas_id', Auth::user()->petugas->kelas->id);
+                               });
+        } else {
+            $query = TagihanSpp::with(['siswa.kelas', 'tarif']);
+        }
 
         // Filter berdasarkan kelas
         if ($request->filled('kelas_id')) {
@@ -109,7 +117,14 @@ class ReportController extends Controller
             'status' => 'nullable|in:belum_bayar,lunas',
         ]);
 
-        $query = TagihanSpp::with(['siswa.kelas', 'tarif']);
+        if(Auth::user()->role == 'wali_kelas'){
+            $query = TagihanSpp::with(['siswa.kelas', 'tarif'])
+                               ->whereHas('siswa', function($q) {
+                                   $q->where('kelas_id', Auth::user()->petugas->kelas->id);
+                               });
+        } else {
+            $query = TagihanSpp::with(['siswa.kelas', 'tarif']);
+        }
 
         // Apply same filters as PDF generation
         if ($request->filled('kelas_id')) {

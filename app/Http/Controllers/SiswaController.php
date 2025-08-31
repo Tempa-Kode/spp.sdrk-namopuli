@@ -2,15 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Siswa;
 use App\Models\Kelas;
+use App\Models\Siswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SiswaController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Siswa::with('kelas')->orderBy('nama_siswa');
+        if(Auth::user()->role == 'wali_kelas'){
+            $query = Siswa::with('kelas')
+                          ->where('kelas_id', Auth::user()->petugas->kelas->id)
+                          ->orderBy('nama_siswa');
+        } else {
+            $query = Siswa::with('kelas')->orderBy('nama_siswa');
+        }
 
         // Filter berdasarkan kelas
         if ($request->filled('kelas_id') && $request->kelas_id != '') {

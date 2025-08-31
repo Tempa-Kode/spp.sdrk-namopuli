@@ -42,14 +42,11 @@
         <hr class="horizontal dark mt-0">
         <div class="collapse navbar-collapse  w-auto vh-100" id="sidenav-collapse-main">
            @switch(Auth::user()->role)
-               @case('admin')
-                    @include('components.menu-stackholder')
-                    @break
-                @case('petugas')
-                    @include('components.menu-stackholder')
-                    @break
-               @default
+                @case('wali')
                     @include('components.menu-wali')
+                    @break
+                @default
+                    @include('components.menu-stackholder')
            @endswitch
         </div>
     </aside>

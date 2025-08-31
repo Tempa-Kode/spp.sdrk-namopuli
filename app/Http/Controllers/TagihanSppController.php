@@ -2,17 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TagihanSpp;
-use App\Models\TarifSPP;
-use App\Models\Siswa;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Models\Siswa;
+use App\Models\TarifSPP;
+use App\Models\TagihanSpp;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TagihanSppController extends Controller
 {
     public function index(Request $request)
     {
-        $query = TagihanSpp::with(['siswa.kelas', 'tarif']);
+        if(Auth::user()->role == 'wali_kelas'){
+            $query = TagihanSpp::with(['siswa.kelas', 'tarif'])
+                               ->whereHas('siswa', function($q) {
+                                   $q->where('kelas_id', Auth::user()->petugas->kelas->id);
+                               });
+        } else {
+            $query = TagihanSpp::with(['siswa.kelas', 'tarif']);
+        }
 
         // Filter berdasarkan bulan
         if ($request->filled('bulan')) {
