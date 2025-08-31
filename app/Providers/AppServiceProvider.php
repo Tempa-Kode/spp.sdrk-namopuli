@@ -24,5 +24,8 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('crud-data', function (User $user) {
             return $user->role === 'admin';
         });
+        Gate::define('filter-data', function (User $user) {
+            return $user->role === 'admin' || $user->role === 'petugas';
+        });
     }
 }

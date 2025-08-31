@@ -120,6 +120,7 @@
             <span class="nav-link-text ms-1">Data Siswa</span>
         </a>
     </li>
+    @can('crud-data')
     <li class="nav-item">
         <a class="nav-link {{ Route::currentRouteName() == "guru-pegawai.index" ? "active" : "-" }}"
             href="{{ route("guru-pegawai.index") }}">
@@ -179,6 +180,8 @@
             <span class="nav-link-text ms-1">Data Kelas</span>
         </a>
     </li>
+    @endcan
+    @can('filter-data')
     <li class="nav-item">
         <a class="nav-link {{ Route::currentRouteName() == "tarif-spp.index" ? "active" : "" }}"
             href="{{ route("tarif-spp.index") }}">
@@ -207,6 +210,7 @@
             <span class="nav-link-text ms-1">Tarif SPP</span>
         </a>
     </li>
+    @endcan
     <li class="nav-item mt-3">
         <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Reports</h6>
     </li>

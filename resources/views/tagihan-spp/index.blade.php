@@ -12,9 +12,11 @@
                             <i class="fas fa-plus-circle"></i> Buat Tagihan Bulan Ini
                         </button>
                     @endif
-                    <a href="{{ route('tagihan-spp.create') }}" class="btn btn-primary btn-sm">
-                        <i class="fas fa-plus"></i> Tambah Manual
-                    </a>
+                    @if (Auth::user()->role != 'wali' && Auth::user()->role != 'wali_kelas')
+                        <a href="{{ route('tagihan-spp.create') }}" class="btn btn-primary btn-sm">
+                            <i class="fas fa-plus"></i> Tambah Manual
+                        </a>
+                    @endif
                 </div>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
@@ -38,6 +40,7 @@
                                 <option value="lunas" {{ request('status') == 'lunas' ? 'selected' : '' }}>Lunas</option>
                             </select>
                     </div>
+                    @can('filter-data')
                     <div class="col-md-3">
                             <select name="kelas_id" class="form-select" onchange="document.getElementById('filterForm').submit()">
                                 <option value="">Semua Kelas</option>
@@ -48,6 +51,7 @@
                                 @endforeach
                             </select>
                     </div>
+                    @endcan
                     <div class="col-md-2">
                             <a href="{{ route('tagihan-spp.index') }}" class="btn btn-outline-secondary">
                                 <i class="fas fa-undo"></i> Reset

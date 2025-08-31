@@ -11,6 +11,7 @@
             <div class="card-body">
                 <form method="GET" action="{{ route("reports.tagihan-spp.preview") }}" id="filterForm">
                     <div class="row">
+                        @can('filter-data')
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label for="kelas_id" class="form-label">Kelas</label>
@@ -25,6 +26,7 @@
                                 </select>
                             </div>
                         </div>
+                        @endcan
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label for="bulan" class="form-label">Bulan</label>

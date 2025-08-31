@@ -6,9 +6,11 @@
         <div class="card mb-4">
             <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                 <h6 class="mb-0">Daftar Tarif SPP</h6>
-                <a href="{{ route("tarif-spp.create") }}" class="btn btn-primary btn-sm">
-                    <i class="fas fa-plus"></i> Tambah Tarif SPP
-                </a>
+                @can('crud-data')
+                    <a href="{{ route("tarif-spp.create") }}" class="btn btn-primary btn-sm">
+                        <i class="fas fa-plus"></i> Tambah Tarif SPP
+                    </a>
+                @endcan
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <!-- Filter Section -->
@@ -70,9 +72,11 @@
                                         Kelas</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nominal
                                     </th>
+                                    @can('crud-data')
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Aksi</th>
+                                    @endcan
                                 </tr>
                             </thead>
                             <tbody>
@@ -109,6 +113,7 @@
                                                 </div>
                                             </div>
                                         </td>
+                                        @can('crud-data')
                                         <td class="align-middle text-center">
                                             <div class="d-flex justify-content-center">
                                                 <a href="{{ route("tarif-spp.edit", $item->id) }}"
@@ -127,6 +132,7 @@
                                                 </form>
                                             </div>
                                         </td>
+                                        @endcan
                                     </tr>
                                 @endforeach
                             </tbody>

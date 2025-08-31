@@ -12,11 +12,14 @@
         <div class="card mb-4">
             <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                 <h6 class="mb-0">Data Siswa</h6>
+                @can('crud-data')
                 <a href="{{ route("siswa.create") }}" class="btn btn-primary btn-sm">
                     <i class="fas fa-plus"></i> Tambah Siswa
                 </a>
+                @endcan
             </div>
 
+            @can('filter-data')
             <!-- Filter Section -->
             <div class="card-body pt-0 pb-3">
                 <div class="bg-light rounded p-3 mb-3">
@@ -77,6 +80,7 @@
                     </div>
                 @endif
             </div>
+            @endcan
 
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="table-responsive p-0">
@@ -95,8 +99,10 @@
                                     width="10%">No Telp Orang Tua</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                                     width="15%">Jenis Kelamin</th>
+                                @can('crud-data')
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                                     width="25%">Aksi</th>
+                                @endcan
                             </tr>
                         </thead>
                         <tbody>
@@ -123,6 +129,7 @@
                                             {{ $item->jenis_kelamin_lengkap }}
                                         </span>
                                     </td>
+                                    @can('crud-data')
                                     <td class="text-center">
                                         <a href="{{ route("siswa.edit", $item->id) }}"
                                             class="btn btn-outline-primary btn-sm me-2" title="Edit Data">
@@ -139,6 +146,7 @@
                                             </button>
                                         </form>
                                     </td>
+                                    @endcan
                                 </tr>
                             @endforeach
                         </tbody>
