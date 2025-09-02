@@ -46,7 +46,6 @@ class KelasController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nama_kelas' => 'required|string|max:255|unique:kelas,nama_kelas',
             'tingkat_kelas' => 'required|integer|min:1|max:12',
             'wali_kelas_id' => 'nullable|exists:guru_pegawai,id',
         ]);
@@ -83,7 +82,6 @@ class KelasController extends Controller
     public function update(Request $request, Kelas $kelas)
     {
         $validated = $request->validate([
-            'nama_kelas' => 'required|string|max:255|unique:kelas,nama_kelas,' . $kelas->id,
             'tingkat_kelas' => 'required|integer|min:1|max:12',
             'wali_kelas_id' => 'nullable|exists:guru_pegawai,id',
         ]);

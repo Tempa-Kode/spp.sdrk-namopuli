@@ -23,17 +23,6 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="nama_kelas" class="form-label">Nama Kelas <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control @error('nama_kelas') is-invalid @enderror"
-                                       id="nama_kelas" name="nama_kelas" value="{{ old('nama_kelas') }}"
-                                       placeholder="Contoh: 1A, 3B, dll" required>
-                                @error('nama_kelas')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
                                 <label for="tingkat_kelas" class="form-label">Tingkat Kelas <span class="text-danger">*</span></label>
                                 <select class="form-select @error('tingkat_kelas') is-invalid @enderror"
                                         id="tingkat_kelas" name="tingkat_kelas" required>

@@ -31,7 +31,6 @@
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Kelas</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tingkat</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Wali Kelas</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Jumlah Siswa</th>
@@ -43,13 +42,6 @@
                                     <tr>
                                         <td class="text-center">
                                             <span class="text-secondary text-xs font-weight-bold">{{ $loop->iteration }}</span>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ $item->nama_kelas }}</h6>
-                                                </div>
-                                            </div>
                                         </td>
                                         <td>
                                             <div class="d-flex px-2 py-1">
