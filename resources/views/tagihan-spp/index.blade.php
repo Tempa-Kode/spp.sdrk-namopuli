@@ -85,7 +85,9 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Bulan</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nominal</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
+                                    @can('filter-data')
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
+                                    @endcan
                                 </tr>
                             </thead>
                             <tbody>
@@ -142,20 +144,22 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>
-                                            <a href="{{ route('tagihan-spp.edit', $item) }}" class="btn btn-sm btn-outline-warning font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit Tagihan">
-                                                Edit
-                                            </a>
-                                            <form action="{{ route('tagihan-spp.destroy', $item) }}" class="d-inline" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus tagihan ini?');">
-                                                @csrf
-                                                @method('DELETE')
-                                                        <button type="submit" class="btn btn-sm btn-outline-danger font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Hapus Tagihan">
-                                                            Hapus
-                                                        </button>
-                                                    </form>
+                                        @can('filter-data')
+                                            <td>
+                                                <a href="{{ route('tagihan-spp.edit', $item) }}" class="btn btn-sm btn-outline-warning font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit Tagihan">
+                                                    Edit
+                                                </a>
+                                                <form action="{{ route('tagihan-spp.destroy', $item) }}" class="d-inline" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus tagihan ini?');">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                            <button type="submit" class="btn btn-sm btn-outline-danger font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Hapus Tagihan">
+                                                                Hapus
+                                                            </button>
+                                                        </form>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
+                                            </td>
+                                        @endcan
                                     </tr>
                                 @endforeach
                             </tbody>
