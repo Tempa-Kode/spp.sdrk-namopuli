@@ -143,7 +143,7 @@
                                 <label for="email" class="form-label">Email <span
                                         class="text-danger">*</span></label>
                                 <input type="email" class="form-control @error("email") is-invalid @enderror"
-                                    id="email" name="email" value="{{ old("email", $guruPegawai->user->email) }}" required>
+                                    id="email" name="email" value="{{ old("email", $guruPegawai->user->email) }}">
                                 @error("email")
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
