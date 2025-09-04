@@ -87,7 +87,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link  " href="../pages/sign-up.html">
+        <a class="nav-link" href="">
             <form action="{{ route("logout") }}" method="post" class="w-100">
                 @csrf
                 <button type="submit" class="btn btn-danger btn-sm w-100 mb-0">Logout</button>
