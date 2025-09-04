@@ -103,19 +103,6 @@
                                 <div class="form-text">Nominal berdasarkan tarif SPP yang dipilih.</div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label class="form-label">Status Transaksi</label>
-                                <div class="form-control bg-light">
-                                    @if ($tagihanSpp->transaksi)
-                                        <span class="badge bg-success">Ada Transaksi</span>
-                                    @else
-                                        <span class="badge bg-secondary">Belum Ada Transaksi</span>
-                                    @endif
-                                </div>
-                                <div class="form-text">Status transaksi pembayaran tagihan ini.</div>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="alert alert-info">

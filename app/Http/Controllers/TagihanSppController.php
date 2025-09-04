@@ -39,7 +39,7 @@ class TagihanSppController extends Controller
             });
         }
 
-        $tagihanSpp = $query->orderBy('bulan', 'desc')->orderBy('created_at', 'desc')->paginate(15);
+        $tagihanSpp = $query->orderBy('bulan', 'desc')->orderBy('created_at', 'desc')->get();
 
         // Data untuk filter
         $bulanList = TagihanSpp::distinct()->orderBy('bulan', 'desc')->pluck('bulan');
