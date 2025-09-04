@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset("assets/img/apple-icon.png") }}">
-    <link rel="icon" type="image/png" href="{{ asset("assets/img/favicon.png") }}">
+    {{-- <link rel="apple-touch-icon" sizes="76x76" href="{{ asset("assets/img/apple-icon.png") }}"> --}}
+    <link rel="icon" type="image/png" href="{{ asset("landing/img/favicon.ico") }}">
     <title>
         @yield("title", "Dashboard") - SPP SD RK NAMOPULI
     </title>
@@ -35,7 +35,7 @@
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
                 aria-hidden="true" id="iconSidenav"></i>
             <a class="navbar-brand m-0" href="">
-                <img src="{{ asset("assets/img/logo-ct-dark.png") }}" class="navbar-brand-img h-100" alt="main_logo">
+                <img src="{{ asset("landing/img/logo.svg") }}" class="navbar-brand-img h-100" alt="main_logo">
                 <span class="ms-1 font-weight-bold">SD RK Namopuli</span>
             </a>
         </div>
