@@ -16,6 +16,7 @@ Route::get('/cek-tagihan', function () {
 
 Route::get('/tagihan', [App\Http\Controllers\TagihanSppController::class, 'cekTagihan'])->name('home.cek-tagihan.nisn');
 
+Route::put('tagihan/pembayaran/update-status', [App\Http\Controllers\PembayaranController::class, 'updateStatus'])->name('home.tagihan-spp.update-status.pembayaran');
 Route::get('/pembayaran/{id}', [App\Http\Controllers\TagihanSppController::class, 'bayarTagihan'])->name('home.pembayaran');
 Route::post('/bayar', [App\Http\Controllers\PembayaranController::class, 'bayar'])->name('home.tagihan-spp.bayar');
 

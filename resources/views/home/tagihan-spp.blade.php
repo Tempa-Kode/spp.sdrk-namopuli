@@ -76,7 +76,7 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="5" class="text-center">Tidak ada tagihan yang ditemukan.</td>
+                                            <td colspan="6" class="text-center">Tidak ada tagihan yang ditemukan.</td>
                                         </tr>
                                     @endforelse
 

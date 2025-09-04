@@ -72,7 +72,11 @@
                                     </div>
 
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-success btn-lg px-5">
+                                        <button type="button"
+                                            data-tagihan-id="{{ $tagihan->id }}"
+                                            data-jumlah="{{ $tagihan->tarif->nominal }}"
+                                            id="bayar" class="btn btn-success btn-lg px-5"
+                                        >
                                             <i class="ti-check mr-2"></i>
                                             Bayar Sekarang
                                         </button>
@@ -191,49 +195,132 @@
         }
     </style>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('paymentForm');
-            const submitBtn = form.querySelector('button[type="submit"]');
+@endsection
+@push('scripts')
+    <script type="text/javascript"
+      src="https://app.sandbox.midtrans.com/snap/snap.js"
+            data-client-key="{{ config('services.midtrans.client_key') }}"></script>
 
-            // Handle payment method selection
-            const paymentMethods = document.querySelectorAll('input[name="payment_method"]');
-            paymentMethods.forEach(method => {
-                method.addEventListener('change', function() {
-                    // Remove active class from all cards
-                    document.querySelectorAll('.payment-method-card .card').forEach(card => {
-                        card.classList.remove('active');
-                    });
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Set environment untuk sandbox
+            if (typeof snap !== 'undefined') {
+                snap.environment = 'sandbox';
+            }
 
-                    // Add active class to selected card
-                    this.closest('.payment-method-card').querySelector('.card').classList.add(
-                        'active');
+            $('#bayar').on('click', function () {
+                const payButton = $(this);
+                const tagihan_id = payButton.data('tagihan-id');
+                const jumlah_bayar = payButton.data('jumlah');
+
+                payButton.prop('disabled', true).text('Memproses...');
+
+                $.ajax({
+                    url: '{{ route("home.tagihan-spp.bayar") }}',
+                    method: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        tagihan_id: tagihan_id,
+                        jumlah_bayar: jumlah_bayar
+                    },
+                    success: function(response) {
+                        if (!response.snap_token) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Gagal mendapatkan token pembayaran. Silakan coba lagi.',
+                            });
+                            payButton.prop('disabled', false).html('<i class="fa-solid fa-money-bill"></i> Bayar');
+                            return;
+                        }
+
+                        // Pastikan snap loaded sebelum digunakan
+                        if (typeof snap === 'undefined') {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'Midtrans Snap belum termuat. Silakan refresh halaman.',
+                            });
+                            payButton.prop('disabled', false).html('<i class="fa-solid fa-money-bill"></i> Bayar');
+                            return;
+                        }
+
+                        snap.pay(response.snap_token, {
+                            onSuccess: function(result){
+                                console.log('Success:', result);
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Pembayaran Berhasil!',
+                                    text: 'Terima kasih, pembayaran Anda telah kami terima.',
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                }).then(() => {
+                                    updateStatus(result.order_id);
+                                });
+                            },
+                            onPending: function(result){
+                                console.log('Pending:', result);
+                                Swal.fire({
+                                    icon: 'info',
+                                    title: 'Menunggu Pembayaran',
+                                    text: 'Selesaikan pembayaran Anda sesuai instruksi yang diberikan.',
+                                }).then(() => {
+                                    location.reload();
+                                });
+                            },
+                            onError: function(result){
+                                console.log('Error:', result);
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Pembayaran Gagal',
+                                    text: 'Terjadi kesalahan saat memproses pembayaran. Silakan coba lagi.'
+                                });
+                                payButton.prop('disabled', false).html('<i class="fa-solid fa-money-bill"></i> Bayar');
+                            },
+                            onClose: function(){
+                                console.log('Popup ditutup oleh pengguna.');
+                                Swal.fire({
+                                    icon: 'warning',
+                                    title: 'Dibatalkan',
+                                    text: 'Anda menutup jendela pembayaran sebelum selesai.'
+                                });
+                                payButton.prop('disabled', false).html('<i class="fa-solid fa-money-bill"></i> Bayar');
+                            }
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('AJAX Error:', error);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Koneksi Gagal',
+                            text: 'Tidak dapat terhubung ke server. Periksa koneksi internet Anda.'
+                        });
+                        payButton.prop('disabled', false).html('<i class="fa-solid fa-money-bill"></i> Bayar');
+                    }
                 });
-            });
 
-            // Handle form submission
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-
-                // Disable submit button
-                submitBtn.disabled = true;
-                submitBtn.innerHTML = '<i class="spinner-border spinner-border-sm mr-2"></i>Memproses...';
-
-                // Simulate payment processing
-                setTimeout(() => {
-                    // Here you would normally submit the form to your backend
-                    // For demo purposes, we'll just show an alert
-                    alert('Pembayaran sedang diproses. Anda akan diarahkan ke halaman pembayaran.');
-
-                    // Re-enable button
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = '<i class="ti-check mr-2"></i>Bayar Sekarang';
-
-                    // In real implementation, you would do:
-                    // this.submit();
-                }, 2000);
+                function updateStatus($order_id){
+                    $.ajax({
+                        url: '{{ route("home.tagihan-spp.update-status.pembayaran") }}',
+                        method: 'PUT',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            _method: 'PUT',
+                            kd_transaksi : $order_id
+                        },
+                        success: function(response) {
+                            window.location.href = '{{ route("home.cek-tagihan") }}';
+                        },
+                        error: function(xhr, status, error) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'Gagal memperbarui status pembayaran. Silakan hubungi admin.'
+                            });
+                        }
+                    });
+                }
             });
         });
     </script>
-
-@endsection
+@endpush

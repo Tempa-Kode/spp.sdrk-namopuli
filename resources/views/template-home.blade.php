@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="{{ asset("landing/css/faq-accordion.css") }}">
     <!-- Banner Plain CSS -->
     <link rel="stylesheet" href="{{ asset("landing/css/banner-plain.css") }}">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -151,6 +152,8 @@
     <script src="{{ asset("landing/js/faq-accordion.js") }}"></script>
     <!-- custom js -->
     <script src="{{ asset("landing/js/custom.js") }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @stack('scripts')
 </body>
 
 </html>

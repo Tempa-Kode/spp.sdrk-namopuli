@@ -33,8 +33,10 @@ class PembayaranController extends Controller
 
             try {
                 $snapToken = null;
-                DB::transaction(function () use ($request, &$snapToken) {
-                    $kodeTransaksi = "TRX-" . Auth::user()->siswa->nisn . "-" . now()->timestamp;
+                $tagihan = TagihanSpp::with('siswa')->findOrFail($request->tagihan_id);
+                DB::transaction(function () use ($request, &$snapToken, $tagihan) {
+                    $nisn = $tagihan->siswa->nisn ?? Auth::user()->siswa->nisn;
+                    $kodeTransaksi = "TRX-" . $nisn . "-" . now()->timestamp;
                     $transaksi = Transaksi::create([
                         'kd_transaksi' => $kodeTransaksi,
                         'tagihan_id' => $request->tagihan_id,
@@ -48,7 +50,7 @@ class PembayaranController extends Controller
                             'gross_amount' => $request->jumlah_bayar,
                         ],
                         'customer_details' => [
-                            'first_name' => Auth::user()->siswa->nama_siswa ?? Auth::user()->name,
+                            'first_name' => $tagihan->siswa->nama_siswa ?? Auth::user()->siswa->nama_siswa,
                             'last_name' => '',
                             'email' => 'siswa@example.com',
                             'phone' => '08111222333',
@@ -115,14 +117,27 @@ class PembayaranController extends Controller
             if ($data['transaction_status'] ?? '' === 'settlement') {
                 $transaksi->tagihan->status = 'lunas';
                 $transaksi->tagihan->save();
+
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Status pembayaran berhasil diperbarui menjadi lunas.',
+                    'status' => 'lunas'
+                ]);
             } else {
                 $transaksi->tagihan->status = 'belum_bayar';
                 $transaksi->tagihan->save();
-            }
 
-            return redirect()->back()->with('success', 'Status transaksi berhasil diperbarui.');
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Status pembayaran diperbarui.',
+                    'status' => 'belum_bayar'
+                ]);
+            }
         }
 
-        return redirect()->back()->with('error', 'Gagal memeriksa status transaksi');
+        return response()->json([
+            'success' => false,
+            'message' => 'Gagal memeriksa status transaksi'
+        ], 500);
     }
 }
