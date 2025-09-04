@@ -14,6 +14,8 @@ Route::get('/cek-tagihan', function () {
     return view('home.cek-tagihan');
 })->name('home.cek-tagihan');
 
+Route::get('/tagihan', [App\Http\Controllers\TagihanSppController::class, 'cekTagihan'])->name('home.cek-tagihan.nisn');
+
 Route::get('/login', function () {
     return view('login');
 })->name('login');

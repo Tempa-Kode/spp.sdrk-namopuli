@@ -23,6 +23,11 @@
     <!-- Search Section -->
     <section class="feature_part section_padding">
         <div class="container">
+            @if (session('error'))
+                <div class="alert alert-danger text-center">
+                    <i class="ti-close mr-2"></i>{{ session('error') }}
+                </div>
+            @endif
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="search-card">
@@ -35,14 +40,16 @@
                                 <p class="text-muted mt-2">Masukkan NISN siswa</p>
                             </div>
                             <div class="card-body">
-                                <form id="searchForm">
+                                <form action="{{ route('home.cek-tagihan.nisn') }}" method="get">
+                                    @method('GET')
+                                    @csrf
                                     <div class="form-group">
-                                        <label for="search_input" class="form-label">NISN</label>
+                                        <label for="nisn" class="form-label">NISN</label>
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" placeholder="Contoh: 1234567890"
-                                                name="search" required>
+                                                name="nisn" required>
                                             <div class="input-group-append">
-                                                <button class="btn btn-outline-success" type="button" id="button-addon2">
+                                                <button class="btn btn-outline-success" type="submit">
                                                     <i class="ti-search mr-1"></i>Cari
                                                 </button>
                                             </div>
@@ -312,118 +319,4 @@
             color: #721c24;
         }
     </style>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const searchForm = document.getElementById('searchForm');
-            const loadingDiv = document.getElementById('loading');
-            const errorDiv = document.getElementById('error');
-            const resultsDiv = document.getElementById('results');
-
-            searchForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-
-                const searchValue = document.getElementById('search_input').value.trim();
-
-                if (!searchValue) {
-                    return;
-                }
-
-                // Hide previous results
-                errorDiv.style.display = 'none';
-                resultsDiv.style.display = 'none';
-
-                // Show loading
-                loadingDiv.style.display = 'block';
-
-                // Simulate API call (replace with actual API endpoint)
-                setTimeout(() => {
-                    loadingDiv.style.display = 'none';
-
-                    // Simulate search result (replace with actual API response)
-                    const found = Math.random() > 0.3; // 70% chance of finding data
-
-                    if (found) {
-                        displayResults();
-                    } else {
-                        showError(
-                            'Data siswa tidak ditemukan. Pastikan NISN atau nama yang dimasukkan sudah benar.'
-                        );
-                    }
-                }, 2000);
-            });
-
-            function showError(message) {
-                document.getElementById('error-message').textContent = message;
-                errorDiv.style.display = 'block';
-            }
-
-            function displayResults() {
-                // Simulate student data
-                const studentInfo = `
-            <div class="student-card">
-                <div class="row">
-                    <div class="col-md-6">
-                        <strong>Nama Siswa:</strong><br>
-                        <span class="text-primary">Ahmad Wijaya</span>
-                    </div>
-                    <div class="col-md-6">
-                        <strong>NISN:</strong><br>
-                        <span class="text-muted">1234567890</span>
-                    </div>
-                    <div class="col-md-6 mt-2">
-                        <strong>Kelas:</strong><br>
-                        <span class="text-muted">VI-A</span>
-                    </div>
-                    <div class="col-md-6 mt-2">
-                        <strong>Tahun Ajaran:</strong><br>
-                        <span class="text-muted">2024/2025</span>
-                    </div>
-                </div>
-            </div>
-        `;
-
-                const tagihanList = `
-            <div class="tagihan-item belum-bayar">
-                <div class="d-flex justify-content-between align-items-start">
-                    <div>
-                        <h6 class="mb-1">SPP September 2025</h6>
-                        <p class="mb-1 text-muted">Jatuh tempo: 10 September 2025</p>
-                        <h5 class="mb-0 text-danger">Rp 150.000</h5>
-                    </div>
-                    <div class="text-right">
-                        <span class="status-badge status-belum-bayar">Belum Bayar</span>
-                        <br>
-                        <button class="btn btn-primary btn-sm mt-2">
-                            <i class="ti-credit-card mr-1"></i>Bayar
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tagihan-item lunas">
-                <div class="d-flex justify-content-between align-items-start">
-                    <div>
-                        <h6 class="mb-1">SPP Agustus 2025</h6>
-                        <p class="mb-1 text-muted">Dibayar: 5 Agustus 2025</p>
-                        <h5 class="mb-0 text-success">Rp 150.000</h5>
-                    </div>
-                    <div class="text-right">
-                        <span class="status-badge status-lunas">Lunas</span>
-                        <br>
-                        <button class="btn btn-outline-secondary btn-sm mt-2">
-                            <i class="ti-download mr-1"></i>Unduh
-                        </button>
-                    </div>
-                </div>
-            </div>
-        `;
-
-                document.getElementById('student-info').innerHTML = studentInfo;
-                document.getElementById('tagihan-list').innerHTML = tagihanList;
-                resultsDiv.style.display = 'block';
-            }
-        });
-    </script>
-
 @endsection

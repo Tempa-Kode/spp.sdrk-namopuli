@@ -198,4 +198,28 @@ class TagihanSppController extends Controller
             return back()->with('error', 'Gagal menghapus tagihan SPP.');
         }
     }
+
+    public function cekTagihan(Request $request)
+    {
+        $nisn = $request->nisn;
+
+        if (!$nisn) {
+            return redirect()->route('home.cek-tagihan')->with('error', 'Silakan masukkan NISN terlebih dahulu.');
+        }
+
+        $siswa = Siswa::where('nisn', $nisn)->first();
+        if (!$siswa) {
+            return redirect()->route('home.cek-tagihan')->with('error', 'NISN tidak ditemukan. Silakan periksa kembali.');
+        }
+
+        $tagihan = TagihanSpp::with(['siswa', 'tarif'])
+                    ->whereHas('siswa', function($q) use ($nisn) {
+                        $q->where('nisn', $nisn);
+                    })
+                    ->where('status', 'belum_bayar')
+                    ->latest()
+                    ->get();
+
+        return view('home.tagihan-spp', compact('tagihan'));
+    }
 }

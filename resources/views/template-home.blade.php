@@ -56,9 +56,18 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="/#faq">Bantuan / FAQ</a>
                                 </li>
-                                <li class="d-none d-lg-block">
-                                    <a class="btn_1" href="{{ route("login") }}">Login</a>
-                                </li>
+                                @if (Auth::check())
+                                    <li class="nav-item">
+                                        <form action="{{ route('logout') }}" method="post">
+                                            @csrf
+                                            <button type="submit" class="btn_1">Logout</button>
+                                        </form>
+                                    </li>
+                                @else
+                                    <li class="d-none d-lg-block">
+                                        <a class="btn_1" href="{{ route("login") }}">Login</a>
+                                    </li>
+                                @endif
                             </ul>
                         </div>
                     </nav>
