@@ -64,11 +64,13 @@
                                             </td>
                                             <td>
                                                 @if($item->status == 'belum_bayar')
-                                                    <a href="{{ route('tagihan-spp.wali.detail', $item->id) }}" class="btn btn-primary btn-sm">
+                                                    <a href="{{ route('home.pembayaran', $item->id) }}" class="btn btn-primary btn-sm">
                                                         <i class="ti-credit-card mr-1"></i> Bayar
                                                     </a>
                                                 @else
-                                                    -
+                                                    <a href="#" class="btn btn-outline-secondary btn-sm">
+                                                        <i class="ti-download mr-1"></i> Unduh
+                                                    </a>
                                                 @endif
                                             </td>
                                         </tr>

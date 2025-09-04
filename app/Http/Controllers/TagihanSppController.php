@@ -222,4 +222,18 @@ class TagihanSppController extends Controller
 
         return view('home.tagihan-spp', compact('tagihan'));
     }
+
+    public function bayarTagihan($tagihanId)
+    {
+        $tagihan = TagihanSpp::with(['siswa.kelas', 'tarif'])->find($tagihanId);
+        if (!$tagihan) {
+            return redirect()->route('home.cek-tagihan')->with('error', 'Tagihan tidak ditemukan.');
+        }
+
+        if ($tagihan->status == 'lunas') {
+            return redirect()->route('home.cek-tagihan')->with('error', 'Tagihan ini sudah lunas.');
+        }
+
+        return view('home.pembayaran', compact('tagihan'));
+    }
 }
