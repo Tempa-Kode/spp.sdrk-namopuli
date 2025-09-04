@@ -132,8 +132,8 @@
                                     timer: 2000,
                                     showConfirmButton: false
                                 }).then(() => {
-                                    // updateStatus(result.order_id);
-                                    location.reload();
+                                    updateStatus(result.order_id);
+                                    // location.reload();
                                 });
                             },
                             onPending: function(result){
@@ -179,11 +179,12 @@
 
                 function updateStatus($order_id){
                     $.ajax({
-                        url: `/tagihan-spp/update-status/${$order_id}`,
+                        url: '{{ route("tagihan-spp.update-status.pembayaran") }}',
                         method: 'PUT',
                         data: {
                             _token: '{{ csrf_token() }}',
                             _method: 'PUT',
+                            kd_transaksi : $order_id
                         },
                         success: function(response) {
                             location.reload();
