@@ -25,14 +25,14 @@ class SiswaController extends Controller
         }
 
         $data = $query->get();
-        $kelas = Kelas::orderBy('nama_kelas')->get();
+        $kelas = Kelas::orderBy('tingkat_kelas')->get();
 
         return view('siswa.index', compact('data', 'kelas'));
     }
 
     public function create()
     {
-        $kelas = Kelas::orderBy('nama_kelas')->get();
+        $kelas = Kelas::orderBy('tingkat_kelas')->get();
         return view('siswa.create', compact('kelas'));
     }
 
@@ -66,7 +66,7 @@ class SiswaController extends Controller
     public function edit($id)
     {
         $siswa = Siswa::findOrFail($id);
-        $kelas = Kelas::orderBy('nama_kelas')->get();
+        $kelas = Kelas::orderBy('tingkat_kelas')->get();
         return view('siswa.edit', compact('siswa', 'kelas'));
     }
 

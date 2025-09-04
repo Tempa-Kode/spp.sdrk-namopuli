@@ -13,8 +13,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(SiswaSeeder::class);
         $this->call(GuruPegawaiSeeder::class);
+        $this->call(KelasSeeder::class);
+        $this->call(SiswaSeeder::class);
         $this->call(TarifSppSeeder::class);
 
         User::create([

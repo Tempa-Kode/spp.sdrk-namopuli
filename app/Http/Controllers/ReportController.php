@@ -16,7 +16,7 @@ class ReportController extends Controller
      */
     public function tagihanSpp()
     {
-        $kelasList = Kelas::orderBy('tingkat_kelas')->orderBy('nama_kelas')->get();
+        $kelasList = Kelas::orderBy('tingkat_kelas')->orderBy('tingkat_kelas')->get();
         $tahunList = TagihanSpp::selectRaw('YEAR(STR_TO_DATE(CONCAT(bulan, "-01"), "%Y-%m-%d")) as tahun')
                                ->distinct()
                                ->orderBy('tahun', 'desc')
@@ -74,7 +74,7 @@ class ReportController extends Controller
 
         // Data untuk header report
         $filters = [
-            'kelas' => $request->kelas_id ? Kelas::find($request->kelas_id)->nama_kelas : 'Semua Kelas',
+            'kelas' => $request->kelas_id ? Kelas::find($request->kelas_id)->tingkat_kelas : 'Semua Kelas',
             'bulan' => $request->bulan ? Carbon::createFromFormat('Y-m', $request->bulan)->format('F Y') : 'Semua Bulan',
             'tahun' => $request->tahun ?: 'Semua Tahun',
             'status' => $request->status ? ucfirst(str_replace('_', ' ', $request->status)) : 'Semua Status',
@@ -149,7 +149,7 @@ class ReportController extends Controller
                         ->orderBy('created_at', 'desc')
                         ->paginate(20);
 
-        $kelasList = Kelas::orderBy('tingkat_kelas')->orderBy('nama_kelas')->get();
+        $kelasList = Kelas::orderBy('tingkat_kelas')->orderBy('tingkat_kelas')->get();
         $tahunList = TagihanSpp::selectRaw('YEAR(STR_TO_DATE(CONCAT(bulan, "-01"), "%Y-%m-%d")) as tahun')
                                ->distinct()
                                ->orderBy('tahun', 'desc')

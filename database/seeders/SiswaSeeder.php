@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Siswa;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Kelas;
+use App\Models\Siswa;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class SiswaSeeder extends Seeder
 {
@@ -20,7 +21,9 @@ class SiswaSeeder extends Seeder
         {
             if (!$heading)
             {
+                $kelas = Kelas::where('tingkat_kelas', $record['7'])->first();
                 $siswa = array(
+                    'kelas_id' => $kelas ? $kelas->id : null,
                     "nisn" => $record['0'],
                     "nama_siswa" => $record['1'],
                     "jenkel" => $record['2'],

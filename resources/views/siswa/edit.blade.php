@@ -56,7 +56,7 @@
                                     @foreach ($kelas as $item)
                                         <option value="{{ $item->id }}"
                                             {{ old("kelas_id", $siswa->kelas_id) == $item->id ? "selected" : "" }}>
-                                            {{ $item->nama_kelas }}
+                                            Kelas {{ $item->tingkat_kelas }}
                                         </option>
                                     @endforeach
                                 </select>

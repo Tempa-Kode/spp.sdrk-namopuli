@@ -121,11 +121,19 @@
                                     <td class="text-center">
                                         <span class="text-secondary text-xs font-weight-bold">{{ $item->nisn }}</span>
                                     </td>
-                                    <td class="text-center">{{ $item->kelas->nama_kelas ?? "-" }}</td>
-                                    <td class="text-center">{{ $item->nomor_telp_orangtua ?? "-" }}</td>
+                                    <td class="text-center">
+                                        <span class="text-secondary text-xs font-weight-bold">
+                                            {{ $item->kelas ? "Kelas {$item->kelas->tingkat_kelas}" : "-" }}
+                                        </span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="text-secondary text-xs font-weight-bold">
+                                            {{ $item->nomor_telp_orangtua ?? "-" }}
+                                        </span>
+                                    </td>
                                     <td class="text-center">
                                         <span
-                                            class="badge badge-sm {{ $item->jenkel == "L" ? "bg-gradient-primary" : "bg-gradient-secondary" }}">
+                                            class="badge badge-sm text-xs {{ $item->jenkel == "L" ? "bg-gradient-primary" : "bg-gradient-secondary" }}">
                                             {{ $item->jenis_kelamin_lengkap }}
                                         </span>
                                     </td>
