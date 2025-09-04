@@ -4,7 +4,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home.index');
-});
+})->name('home.index');
+
+Route::get('/panduan', function () {
+    return view('home.panduan');
+})->name('home.panduan');
+
+Route::get('/cek-tagihan', function () {
+    return view('home.cek-tagihan');
+})->name('home.cek-tagihan');
 
 Route::get('/login', function () {
     return view('login');

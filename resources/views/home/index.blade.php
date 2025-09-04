@@ -1,7 +1,7 @@
-@extends('template-home')
-@section('title', 'SPP Online SD RK Namopuli')
-@section('body')
-<!-- hero part start-->
+@extends("template-home")
+@section("title", "SPP Online SD RK Namopuli")
+@section("body")
+    <!-- hero part start-->
     <section class="banner_part" style="margin-top: -40px">
         <div class="container">
             <div class="row align-items-center">
@@ -11,8 +11,10 @@
                             <h1>Portal Resmi Pembayaran SPP SD RK Namopuli</h1>
                             <p>Lakukan pembayaran SPP putra-putri Anda dengan cepat, aman, dan tercatat secara digital.
                             </p>
-                            <a href="#" class="btn_1"><i class="ti-check-box mr-2"></i> Cek Tagihan</a>
-                            <a href="#" class="btn_2"><i class="ti-info-alt mr-2"></i> Pembayaran </a>
+                            <a href="{{ route("home.cek-tagihan") }}" class="btn_1"><i class="ti-check-box mr-2"></i> Cek
+                                Tagihan</a>
+                            <a href="{{ route("home.panduan") }}" class="btn_2"><i class="ti-info-alt mr-2"></i> Panduan
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -67,7 +69,7 @@
     <!-- benefit part end-->
 
     <!--::FAQ start::-->
-    <section class="special_cource padding_top">
+    <section id="faq" class="special_cource padding_top">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-xl-5">
@@ -103,8 +105,8 @@
                         <div class="card">
                             <div class="card-header" role="tab" id="faq2">
                                 <h5 class="mb-0">
-                                    <a class="collapsed" data-toggle="collapse" href="#collapseFaq2"
-                                        aria-expanded="false" aria-controls="collapseFaq2">
+                                    <a class="collapsed" data-toggle="collapse" href="#collapseFaq2" aria-expanded="false"
+                                        aria-controls="collapseFaq2">
                                         <span class="faq-question-icon">Q</span>
                                         <span class="faq-question-text">Apa saja pilihan bank untuk metode Virtual
                                             Account?</span>
@@ -122,8 +124,8 @@
                         <div class="card">
                             <div class="card-header" role="tab" id="faq3">
                                 <h5 class="mb-0">
-                                    <a class="collapsed" data-toggle="collapse" href="#collapseFaq3"
-                                        aria-expanded="false" aria-controls="collapseFaq3">
+                                    <a class="collapsed" data-toggle="collapse" href="#collapseFaq3" aria-expanded="false"
+                                        aria-controls="collapseFaq3">
                                         <span class="faq-question-icon">Q</span>
                                         <span class="faq-question-text">Saya sudah bayar tapi belum dapat bukti,
                                             bagaimana?</span>

@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>@yield('title')</title>
+    <title>@yield("title")</title>
     <link rel="icon" href="{{ asset("landing/img/favicon.ico") }}">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset("landing/css/bootstrap.min.css") }}">
@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="{{ asset("landing/css/style.css") }}">
     <!-- FAQ Accordion CSS -->
     <link rel="stylesheet" href="{{ asset("landing/css/faq-accordion.css") }}">
+    <!-- Banner Plain CSS -->
+    <link rel="stylesheet" href="{{ asset("landing/css/banner-plain.css") }}">
 </head>
 
 <body>
@@ -46,16 +48,16 @@
                             id="navbarSupportedContent">
                             <ul class="navbar-nav align-items-center">
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="index.html">Beranda</a>
+                                    <a class="nav-link" href="/">Beranda</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="about.html">Cek Tagihan</a>
+                                    <a class="nav-link" href="{{ route('home.cek-tagihan') }}">Cek Tagihan</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="cource.html">Bantuan / FAQ</a>
+                                    <a class="nav-link" href="/#faq">Bantuan / FAQ</a>
                                 </li>
                                 <li class="d-none d-lg-block">
-                                    <a class="btn_1" href="#">Login</a>
+                                    <a class="btn_1" href="{{ route("login") }}">Login</a>
                                 </li>
                             </ul>
                         </div>
@@ -66,7 +68,7 @@
     </header>
     <!-- Header part end-->
 
-    @yield('body')
+    @yield("body")
 
     <!-- footer part start-->
     <footer class="footer-area">
@@ -74,7 +76,8 @@
             <div class="row justify-content-between">
                 <div class="col-sm-6 col-md-4 col-xl-3">
                     <div class="single-footer-widget footer_1">
-                        <a href="index.html"> <img src="{{ asset('landing/img/logo.svg') }}" class="w-25" alt=""> </a>
+                        <a href="index.html"> <img src="{{ asset("landing/img/logo.svg") }}" class="w-25"
+                                alt=""> </a>
                         <p>SD RK Namopuli </p>
                         <p>Lakukan pembayaran SPP putra-putri Anda dengan cepat, aman, dan tercatat secara digital.</p>
                     </div>
