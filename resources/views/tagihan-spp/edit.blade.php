@@ -25,13 +25,13 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="siswa_id" class="form-label">Siswa <span class="text-danger">*</span></label>
-                                <select class="form-select @error("siswa_id") is-invalid @enderror" id="siswa_id"
+                                <select class="form-select select2-single @error("siswa_id") is-invalid @enderror" id="siswa_id"
                                     name="siswa_id" required>
                                     <option value="">Pilih Siswa</option>
                                     @foreach ($siswaList as $siswa)
                                         <option value="{{ $siswa->id }}"
                                             {{ old("siswa_id", $tagihanSpp->siswa_id) == $siswa->id ? "selected" : "" }}>
-                                            {{ $siswa->nama_siswa }} - {{ $siswa->kelas->nama_kelas ?? "Tidak ada kelas" }}
+                                            [{{ $siswa->nisn }}] {{ $siswa->nama_siswa }} - Kelas {{ $siswa->kelas->tingkat_kelas ?? "No Set" }}
                                         </option>
                                     @endforeach
                                 </select>
