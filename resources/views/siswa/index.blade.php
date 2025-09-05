@@ -36,7 +36,7 @@
                                             @foreach ($kelas as $item)
                                                 <option value="{{ $item->id }}"
                                                     {{ request("kelas_id") == $item->id ? "selected" : "" }}>
-                                                    {{ $item->nama_kelas }}
+                                                    Kelas {{ $item->tingkat_kelas }}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -63,7 +63,7 @@
                         <div class="d-flex align-items-center">
                             <i class="fas fa-info-circle me-2"></i>
                             <span class="text-sm mb-0">
-                                Menampilkan siswa dari kelas: <strong>{{ $selectedKelas->nama_kelas ?? "Unknown" }}</strong>
+                                Menampilkan siswa dari kelas: <strong>{{ $selectedKelas->tingkat_kelas ?? "Unknown" }}</strong>
                                 <span class="badge bg-white text-primary ms-2">{{ $data->count() }} siswa</span>
                             </span>
                         </div>
