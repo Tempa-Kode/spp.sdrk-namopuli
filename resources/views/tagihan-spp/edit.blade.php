@@ -103,6 +103,14 @@
                                 <div class="form-text">Nominal berdasarkan tarif SPP yang dipilih.</div>
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Kode Tagihan</label>
+                                <div class="form-control bg-light">
+                                    {{ $tagihanSpp->kode_tagihan }}
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="alert alert-info">
