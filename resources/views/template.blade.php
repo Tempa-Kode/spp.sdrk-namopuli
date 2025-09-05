@@ -23,6 +23,7 @@
         rel="stylesheet" integrity="sha384-q8xN1tfITXcxdT1l6HMZLc9T7nnCiPJDj/IGsPLlKw47I5bO9PupoYYRIicLIi+B"
         crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- Nepcha Analytics (nepcha.com) -->
     <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
     <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
@@ -96,9 +97,19 @@
         integrity="sha384-LtEKbZknqXqdIrquDzxmcL32nBNaUhz7ounatXGWZGHfz/oZogHg1EidEwTlvUsP" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
     <script type="text/javascript">
         $(document).ready(function() {
             $('.datatable').DataTable();
+            $('.select2-single').select2({
+                theme: 'bootstrap-5',
+                width: '100%',
+                placeholder: function(){
+                    return $(this).data('placeholder');
+                },
+                allowClear: true
+            });
         });
     </script>
     <script>
