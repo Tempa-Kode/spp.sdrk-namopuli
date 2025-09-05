@@ -21,6 +21,12 @@
             <div class="card-body">
                 <div class="row mb-3">
                     <input type="hidden" name="tagihan_id" value="{{ $tagihan->id }}">
+                    <label for="kode_tagihan" class="col-sm-3 col-form-label">Kode Tagihan</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="kode_tagihan" readonly value="{{ $tagihan->kode_tagihan }}">
+                    </div>
+                </div>
+                <div class="row mb-3">
                     <label for="nama_siswa" class="col-sm-3 col-form-label">Nama Siswa</label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="nama_siswa" readonly value="{{ $tagihan->siswa->nama_siswa }}">
@@ -35,7 +41,7 @@
                 <div class="row mb-3">
                     <label for="kelas" class="col-sm-3 col-form-label">Kelas</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="kelas" readonly value="{{ $tagihan->siswa->kelas->nama_kelas }}">
+                        <input type="text" class="form-control" id="kelas" readonly value="Kelas {{ $tagihan->siswa->kelas->tingkat_kelas ?? '-' }}">
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -44,30 +50,31 @@
                         <input type="text" class="form-control" id="status" readonly value="{{ $tagihan->status == 'belum_bayar' ? 'Belum Bayar' : 'Lunas' }}">
                     </div>
                 </div>
+                <div class="d-flex gap-2">
                 @if($tagihan->status == 'belum_bayar')
-                <div class="mb-3">
-                    <button type="button" class="btn btn-success" id="bayar"
-                        data-tagihan-id="{{ $tagihan->id }}"
-                        data-jumlah="{{ $tagihan->tarif->nominal }}"
-                    >
-                        <i class="fa-solid fa-money-bill"></i> Bayar
-                    </button>
-                    @if (isset($tagihan->transaksi) && isset($tagihan->transaksi->kd_transaksi))
-                        <form action="{{ route('tagihan-spp.update-status.pembayaran') }}" method="post" class="d-inline">
-                            @csrf
-                            @method('PUT')
-                            <input type="hidden" name="kd_transaksi" value="{{ $tagihan->transaksi->kd_transaksi }}">
-                            <button type="submit" class="btn btn-outline-warning"><i class="fa-solid fa-arrows-spin"></i> Cek Status</button>
-                        </form>
+                    <div class="mb-3">
+                        <button type="button" class="btn btn-success" id="bayar"
+                            data-tagihan-id="{{ $tagihan->id }}"
+                            data-jumlah="{{ $tagihan->tarif->nominal }}"
+                        >
+                            <i class="fa-solid fa-money-bill"></i> Bayar
+                        </button>
+                        @if (isset($tagihan->transaksi) && isset($tagihan->transaksi->kd_transaksi))
+                            <form action="{{ route('tagihan-spp.update-status.pembayaran') }}" method="post" class="d-inline">
+                                @csrf
+                                @method('PUT')
+                                <input type="hidden" name="kd_transaksi" value="{{ $tagihan->transaksi->kd_transaksi }}">
+                                <button type="submit" class="btn btn-outline-warning"><i class="fa-solid fa-arrows-spin"></i> Cek Status</button>
+                            </form>
+                        @endif
+                    </div>
                     @endif
+                    <div class="mb-3">
+                        <a href="{{ route('tagihan-spp.kuitansi', $tagihan->id) }}" target="_blank" class="btn btn-outline-warning">
+                            <i class="fa-solid fa-file-arrow-down"></i> Kuitansi
+                        </a>
+                    </div>
                 </div>
-                @else
-                <div class="mb-3">
-                    <a href="{{ route('tagihan-spp.kuitansi', $tagihan->id) }}" target="_blank" class="btn btn-success">
-                        <i class="fa-solid fa-file-arrow-down"></i> Kuitansi
-                    </a>
-                </div>
-                @endif
             </div>
         </div>
     </div>

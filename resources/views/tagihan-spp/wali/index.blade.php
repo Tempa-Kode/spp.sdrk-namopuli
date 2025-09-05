@@ -28,6 +28,7 @@
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kode Tagihan</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Siswa</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kelas</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Bulan</th>
@@ -49,6 +50,13 @@
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
+                                                    <p class="text-xs text-secondary mb-0">{{ $item->kode_tagihan ?? '-' }}</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">{{ $item->siswa->nama_siswa ?? '-' }}</h6>
                                                     <p class="text-xs text-secondary mb-0">{{ $item->siswa->nisn ?? '-' }}</p>
                                                 </div>
@@ -58,7 +66,7 @@
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <p class="text-xs text-secondary mb-0">
-                                                        {{ $item->siswa->kelas->nama_kelas ?? '-' }}
+                                                        Kelas {{ $item->siswa->kelas->tingkat_kelas ?? '-' }}
                                                     </p>
                                                 </div>
                                             </div>
