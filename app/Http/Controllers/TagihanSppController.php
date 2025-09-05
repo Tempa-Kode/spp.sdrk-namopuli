@@ -147,6 +147,11 @@ class TagihanSppController extends Controller
         }
 
         try {
+            $kodeBulan = Carbon::createFromFormat('Y-m', $validated['bulan'])->format('m');
+            $kodeRandom = random_int(100, 999);
+            $nisn = Siswa::find($validated['siswa_id'])->nisn ?: '0000';
+            $kodeTagihan = "{$kodeBulan}-{$kodeRandom}-{$nisn}";
+            $validated['kode_tagihan'] = $kodeTagihan;
             TagihanSpp::create($validated);
             return redirect()->route('tagihan-spp.index')->with('success', 'Tagihan SPP berhasil ditambahkan.');
         } catch (\Exception $e) {
