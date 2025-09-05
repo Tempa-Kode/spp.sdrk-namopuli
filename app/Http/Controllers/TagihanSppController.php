@@ -89,7 +89,11 @@ class TagihanSppController extends Controller
                                  ->first();
 
                 if ($tarif) {
+                    $kodeBulan = Carbon::createFromFormat('Y-m', $bulan)->format('m');
+                    $kodeRandom = random_int(100, 999);
+                    $nisn = $siswa->nisn ?: '0000';
                     TagihanSpp::create([
+                        'kode_tagihan' => "{$kodeBulan}-{$kodeRandom}-{$nisn}",
                         'siswa_id' => $siswa->id,
                         'tarif_id' => $tarif->id,
                         'bulan' => $bulan,

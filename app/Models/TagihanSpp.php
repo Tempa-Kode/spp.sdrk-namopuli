@@ -8,6 +8,7 @@ class TagihanSpp extends Model
 {
     protected $table = 'tagihan_spp';
     protected $fillable = [
+        'kode_tagihan',
         'siswa_id',
         'tarif_id',
         'bulan',
