@@ -2744,14 +2744,14 @@ ul {
   .banner_part:after {
     position: absolute;
     top: 150px;
-    max-width: 100%;
-    max-height: 100%;
+    width: 70%;
+    height: 40%;
     content: "";
     background-image: url(../img/hero-image.svg);
-    background-size: contain;
-    right: 0;
-    left: 0;
-    text-align: center;
+    background-size: cover;
+    background-position: center;
+    right: 10%;
+    left: 10%;
     margin: 0 auto;
     background-repeat: no-repeat;
   }
@@ -2761,15 +2761,15 @@ ul {
   /* line 164, E:/172 Etrain Education/172_Etrain_Education_html/sass/_banner.scss */
   .banner_part:after {
     position: absolute;
-    top: 110px;
-    max-width: 100%;
-    max-height: 100%;
+    top: 80px;
+    width: 70%;
+    height: 65%;
     content: "";
     background-image: url(../img/hero-image.svg);
-    background-size: contain;
-    right: 0;
-    left: 0;
-    text-align: center;
+    background-size: cover;
+    background-position: center;
+    right: 15%;
+    left: 15%;
     margin: 0 auto;
     background-repeat: no-repeat;
   }
