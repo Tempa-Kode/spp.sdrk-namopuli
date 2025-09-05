@@ -22,8 +22,8 @@
                     </div>
                     <div class="col-md-6">
                         <div class="text-end">
-                            <h6 class="mb-0">Kelas: {{ $dataSiswa->kelas->nama_kelas ?? "Belum ditentukan" }}</h6>
-                            <p class="text-xs mb-0">{{ $dataSiswa->jenis_kelamin_lengkap }} | {{ $dataSiswa->agama }}</p>
+                            <h6 class="mb-0">Kelas: {{ $dataSiswa->kelas->tingkat_kelas ?? "Belum ditentukan" }}</h6>
+                            <p class="text-xs mb-0">{{ $dataSiswa->jenis_kelamin_lengkap ?? '-' }} | {{ $dataSiswa->agama ?? '-' }}</p>
                         </div>
                     </div>
                 </div>
