@@ -21,7 +21,7 @@ class TagihanSpp extends Model
 
     public function tarif()
     {
-        return $this->belongsTo(TarifSpp::class, 'tarif_id');
+        return $this->belongsTo(TarifSPP::class, 'tarif_id');
     }
 
     public function transaksi()
