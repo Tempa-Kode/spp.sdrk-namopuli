@@ -37,15 +37,14 @@
                         <div class="step-number">
                             <span class="number">1</span>
                         </div>
-                        <h3 class="step-title">Masukkan Data Siswa</h3>
+                        <h3 class="step-title">Masukkan Data Kode Tagihan</h3>
                         <p class="step-description">
-                            Cari data putra-putri Anda dengan memasukkan <strong>Nomor Induk Siswa Nasional (NISN)</strong>. Pastikan data yang dimasukkan sesuai dengan yang
-                            terdaftar di sekolah.
+                            Cari data putra-putri Anda dengan memasukkan <strong>Kode Tagihan</strong>.
                         </p>
                         <div class="step-tips">
                             <small class="text-muted">
                                 <i class="ti-info-alt mr-1"></i>
-                                Tips: NISN terdapat pada kartu pelajar atau rapor siswa
+                                Tips: Kode Tagihan dapat dilihat pada dashboard orang tua (setelah login)
                             </small>
                         </div>
                     </div>
@@ -58,9 +57,9 @@
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label>NISN atau Nama Siswa</label>
+                                    <label>Kode Tagihan</label>
                                     <input type="text" class="form-control"
-                                        placeholder="Masukkan NISN atau Nama Lengkap">
+                                        placeholder="Masukkan Kode Tagihan">
                                 </div>
                                 <button class="btn btn-primary">
                                     <i class="ti-search mr-1"></i>Cari
