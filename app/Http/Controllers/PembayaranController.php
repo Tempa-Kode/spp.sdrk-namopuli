@@ -79,9 +79,9 @@ class PembayaranController extends Controller
     {
         $tagihan = TagihanSpp::with(['siswa.kelas', 'transaksi'])->findOrFail($id);
 
-        if ($tagihan->status !== 'lunas') {
-            return redirect()->back()->with('error', 'Kuitansi hanya dapat digenerate untuk pembayaran yang sudah lunas');
-        }
+        // if ($tagihan->status !== 'lunas') {
+        //     return redirect()->back()->with('error', 'Kuitansi hanya dapat diunduh untuk pembayaran yang sudah lunas');
+        // }
 
         $pdf = PDF::loadView('tagihan-spp.kuitansi', [
             'tagihan' => $tagihan,
