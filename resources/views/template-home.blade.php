@@ -105,9 +105,7 @@
                     <div class="single-footer-widget footer_2">
                         <h4>Hubungi Kami</h4>
                         <div class="contact_info">
-                            <p><span> Alamat :</span> Jl. xxxxxxxxxx </p>
-                            <p><span> Telp :</span> 0812xxxxxxxx</p>
-                            <p><span> Email : </span>sdrknamopuli@mail.sch.id </p>
+                            <p><span> Alamat :</span> Dusun I Namopuli 	Desa	SUMBUL	KEC. STM HILIR	KAB. DELI SERDANG SUMATERA UTARA</p>
                         </div>
                     </div>
                 </div>

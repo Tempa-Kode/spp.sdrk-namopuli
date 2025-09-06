@@ -404,7 +404,7 @@
         <div class="footer">
             <div class="footer-text">Terima kasih atas pembayaran yang tepat waktu</div>
             <div class="footer-text">Kuitansi ini adalah bukti pembayaran yang sah</div>
-            <div class="footer-contact">SD RK Namopuli | Telp: 08xx xxxx xxxx | Email: info@sdrknamopuli.sch.id</div>
+            <div class="footer-contact">SD RK Namopuli | Dusun I Namopuli 	Desa	SUMBUL	KEC. STM HILIR	KAB. DELI SERDANG SUMATERA UTARA</div>
         </div>
     </div>
 </body>

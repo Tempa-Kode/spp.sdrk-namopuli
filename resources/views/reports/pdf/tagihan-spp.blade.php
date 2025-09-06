@@ -165,7 +165,7 @@
     <div class="header">
         <h1>LAPORAN TAGIHAN SPP</h1>
         <h2>SD RK NAMOPULI</h2>
-        <p>Jl. Alamat Sekolah, Kota, Provinsi | Telp: (021) 123-4567</p>
+        <p>Dusun I Namopuli 	Desa	SUMBUL	KEC. STM HILIR	KAB. DELI SERDANG SUMATERA UTARA</p>
     </div>
 
     <!-- Filter Information -->
@@ -240,11 +240,11 @@
                     {{ number_format($stats["tagihan_lunas"]) }} tagihan lunas ({{ $stats["persentase_lunas"] }}%) dan
                     {{ number_format($stats["tagihan_belum_bayar"]) }} belum bayar
                 </div>
-                <div style="text-align: right;">
+                {{-- <div style="text-align: right;">
                     <strong>Mengetahui,</strong><br><br><br>
                     <u>Kepala Sekolah</u><br>
                     NIP. 123456789012345678
-                </div>
+                </div> --}}
             </div>
         </div>
     @else
