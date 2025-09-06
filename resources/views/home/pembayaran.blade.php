@@ -49,7 +49,7 @@
                                             <div class="col-md-6">
                                                 <h6 class="text-muted mb-1">Kelas</h6>
                                                 <p class="mb-2 font-weight-bold">
-                                                    {{ $tagihan->siswa->kelas->nama_kelas ?? "-" }}</p>
+                                                    {{ $tagihan->siswa->kelas->tingkat_kelas ?? "-" }}</p>
                                             </div>
                                             <div class="col-md-6">
                                                 <h6 class="text-muted mb-1">Periode</h6>

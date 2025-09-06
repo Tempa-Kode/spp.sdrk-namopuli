@@ -19,6 +19,7 @@ Route::get('/tagihan', [App\Http\Controllers\TagihanSppController::class, 'cekTa
 Route::put('tagihan/pembayaran/update-status', [App\Http\Controllers\PembayaranController::class, 'updateStatus'])->name('home.tagihan-spp.update-status.pembayaran');
 Route::get('/pembayaran/{id}', [App\Http\Controllers\TagihanSppController::class, 'bayarTagihan'])->name('home.pembayaran');
 Route::post('/bayar', [App\Http\Controllers\PembayaranController::class, 'bayar'])->name('home.tagihan-spp.bayar');
+Route::get('/kuitansi/{id}', [App\Http\Controllers\PembayaranController::class, 'generateKuitansi'])->name('home.tagihan-spp.kuitansi');
 
 Route::get('/login', function () {
     return view('login');

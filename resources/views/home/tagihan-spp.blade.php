@@ -63,15 +63,16 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                @if($item->status == 'belum_bayar')
-                                                    <a href="{{ route('home.pembayaran', $item->id) }}" class="btn btn-primary btn-sm">
-                                                        <i class="ti-credit-card mr-1"></i> Bayar
+                                                <div class="d-block">
+                                                    @if($item->status == 'belum_bayar')
+                                                        <a href="{{ route('home.pembayaran', $item->id) }}" class="btn btn-primary btn-sm d-block">
+                                                            <i class="ti-credit-card mr-1"></i> Bayar
+                                                        </a>
+                                                    @endif
+                                                    <a href="{{ route('home.tagihan-spp.kuitansi', $item->id) }}" class="btn btn-outline-secondary btn-sm d-block mt-1">
+                                                            <i class="ti-download mr-1"></i>Kuitansi
                                                     </a>
-                                                @else
-                                                    <a href="#" class="btn btn-outline-secondary btn-sm">
-                                                        <i class="ti-download mr-1"></i> Unduh
-                                                    </a>
-                                                @endif
+                                                </div>
                                             </td>
                                         </tr>
                                     @empty
@@ -84,7 +85,7 @@
                             </table>
                         </div>
                         <div class="card-footer">
-                            <a href="" class="btn_1">
+                            <a href="{{ route('tagihan-spp.wali') }}" class="btn_1">
                                 <i class="ti-receipt mr-2"></i>
                                 Lihat Riwayat Tagihan
                             </a>

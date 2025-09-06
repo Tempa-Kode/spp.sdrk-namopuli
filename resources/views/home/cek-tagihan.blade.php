@@ -10,9 +10,12 @@
                     <div class="banner_text">
                         <div class="banner_text_iner">
                             <h1 class="mb-4">Cek Tagihan SPP</h1>
-                            <p class="lead text-white">Masukkan NISN atau Nama Lengkap siswa untuk melihat detail tagihan SPP
+                            {{-- <p class="lead text-white">Masukkan NISN atau Nama Lengkap siswa untuk melihat detail tagihan SPP
                                 yang
-                                perlu dibayarkan.</p>
+                                perlu dibayarkan.</p> --}}
+                            <p class="lead text-white">
+                                Masukan kode tagihan untuk melihat detail tagihan SPP.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -37,17 +40,18 @@
                                     <i class="ti-search mr-2 text-primary"></i>
                                     Cari Data Siswa
                                 </h3>
-                                <p class="text-muted mt-2">Masukkan NISN siswa</p>
+                                {{-- <p class="text-muted mt-2">Masukkan NISN siswa</p> --}}
+                                <p class="text-muted mt-2">Masukkan Kode Tagihan</p>
                             </div>
                             <div class="card-body">
                                 <form action="{{ route('home.cek-tagihan.nisn') }}" method="get">
                                     @method('GET')
                                     @csrf
                                     <div class="form-group">
-                                        <label for="nisn" class="form-label">NISN</label>
+                                        <label for="kode_tagihan" class="form-label">Kode Tagihan</label>
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" placeholder="Contoh: 1234567890"
-                                                name="nisn" required>
+                                                name="kode_tagihan" required>
                                             <div class="input-group-append">
                                                 <button class="btn btn-outline-success" type="submit">
                                                     <i class="ti-search mr-1"></i>Cari
@@ -56,45 +60,10 @@
                                         </div>
                                         <small class="form-text text-muted">
                                             <i class="ti-info-alt mr-1"></i>
-                                            NISN dapat ditemukan pada kartu pelajar atau rapor siswa
+                                            Kode tagihan dapat ditemukan pada dashboard SPP siswa.
                                         </small>
                                     </div>
                                 </form>
-
-                                <!-- Loading State -->
-                                <div id="loading" class="text-center" style="display: none;">
-                                    <div class="spinner-border text-primary" role="status">
-                                        <span class="sr-only">Mencari...</span>
-                                    </div>
-                                    <p class="mt-2 text-muted">Sedang mencari data siswa...</p>
-                                </div>
-
-                                <!-- Error State -->
-                                <div id="error" class="alert alert-danger" style="display: none;">
-                                    <i class="ti-close mr-2"></i>
-                                    <span id="error-message">Data siswa tidak ditemukan. Pastikan NISN atau nama yang
-                                        dimasukkan sudah benar.</span>
-                                </div>
-
-                                <!-- Results -->
-                                <div id="results" style="display: none;">
-                                    <hr>
-                                    <h5 class="mb-3">
-                                        <i class="ti-user mr-2 text-success"></i>
-                                        Data Siswa Ditemukan
-                                    </h5>
-                                    <div id="student-info" class="mb-4">
-                                        <!-- Student info will be populated here -->
-                                    </div>
-
-                                    <h5 class="mb-3">
-                                        <i class="ti-receipt mr-2 text-warning"></i>
-                                        Tagihan SPP
-                                    </h5>
-                                    <div id="tagihan-list">
-                                        <!-- Tagihan list will be populated here -->
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>

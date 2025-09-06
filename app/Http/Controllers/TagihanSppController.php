@@ -210,24 +210,22 @@ class TagihanSppController extends Controller
 
     public function cekTagihan(Request $request)
     {
-        $nisn = $request->nisn;
+        $kode_tagihan = $request->kode_tagihan;
 
-        if (!$nisn) {
-            return redirect()->route('home.cek-tagihan')->with('error', 'Silakan masukkan NISN terlebih dahulu.');
-        }
-
-        $siswa = Siswa::where('nisn', $nisn)->first();
-        if (!$siswa) {
-            return redirect()->route('home.cek-tagihan')->with('error', 'NISN tidak ditemukan. Silakan periksa kembali.');
+        if (!$kode_tagihan) {
+            return redirect()->route('home.cek-tagihan')->with('error', 'Silakan masukkan Kode Tagihan terlebih dahulu.');
         }
 
         $tagihan = TagihanSpp::with(['siswa', 'tarif'])
-                    ->whereHas('siswa', function($q) use ($nisn) {
-                        $q->where('nisn', $nisn);
+                    ->whereHas('siswa', function($q) use ($kode_tagihan) {
+                        $q->where('kode_tagihan', $kode_tagihan);
                     })
-                    ->where('status', 'belum_bayar')
                     ->latest()
                     ->get();
+
+        if ($tagihan->isEmpty()) {
+            return redirect()->route('home.cek-tagihan')->with('error', 'Tagihan tidak ditemukan.');
+        }
 
         return view('home.tagihan-spp', compact('tagihan'));
     }
