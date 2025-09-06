@@ -36,7 +36,7 @@ class PembayaranController extends Controller
                 $tagihan = TagihanSpp::with('siswa')->findOrFail($request->tagihan_id);
                 DB::transaction(function () use ($request, &$snapToken, $tagihan) {
                     $nisn = $tagihan->siswa->nisn ?? Auth::user()->siswa->nisn;
-                    $kodeTransaksi = "TRX-" . $nisn . "-" . now()->timestamp;
+                    $kodeTransaksi = $tagihan->kode_tagihan;
                     $transaksi = Transaksi::create([
                         'kd_transaksi' => $kodeTransaksi,
                         'tagihan_id' => $request->tagihan_id,
@@ -51,7 +51,7 @@ class PembayaranController extends Controller
                         ],
                         'customer_details' => [
                             'first_name' => $tagihan->siswa->nama_siswa ?? Auth::user()->siswa->nama_siswa,
-                            'last_name' => '',
+                            'last_name' => $nisn,
                             'email' => 'siswa@example.com',
                             'phone' => '08111222333',
                         ],
