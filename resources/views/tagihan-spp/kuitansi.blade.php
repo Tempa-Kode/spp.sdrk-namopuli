@@ -395,11 +395,6 @@
                                 {{ \Carbon\Carbon::parse($tagihan->transaksi->tanggal_bayar)->format("l, d F Y") }}
                             </td>
                         </tr>
-                        <tr>
-                            <td class="detail-label">Metode Pembayaran</td>
-                            <td class="detail-value">
-                                {{ $tagihan->transaksi->metode_pembayaran ?? "Transfer Bank / Tunai" }}</td>
-                        </tr>
                     @endif
                 </tbody>
             </table>
