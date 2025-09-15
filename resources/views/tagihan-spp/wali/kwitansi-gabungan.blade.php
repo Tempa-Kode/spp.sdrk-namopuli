@@ -392,10 +392,10 @@
             style="background: #E07B39; color: white; border: none; padding: 10px 20px; border-radius: 5px; margin-right: 10px; cursor: pointer;">
             <i class="fa fa-print"></i> Cetak Kuitansi
         </button>
-        <button onclick="window.history.back()"
+        <a href="{{ route('tagihan-spp.wali') }}""
             style="background: #6c757d; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
             Kembali
-        </button>
+        </a>
     </div>
 
     <div class="invoice-container">
