@@ -355,7 +355,7 @@
             <!-- Amount in Words -->
             <div class="amount-words">
                 <div class="amount-words-label">Terbilang</div>
-                <div class="amount-words-value">{{ ucwords(terbilang($tagihan->tarif->nominal)) }} Rupiah
+                <div class="amount-words-value">{{ \App\Helpers\Terbilang::convert($tagihan->tarif->nominal) }} Rupiah
                 </div>
             </div>
 

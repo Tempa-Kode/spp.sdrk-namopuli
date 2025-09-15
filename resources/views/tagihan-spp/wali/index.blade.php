@@ -37,14 +37,14 @@
                             <table class="datatable table align-items-center mb-0">
                                 <thead>
                                     <tr>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No
+                                        </th>
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                             <div class="form-check">
                                                 <input type="checkbox" id="selectAll" class="form-check-input">
                                                 <label class="form-check-label" for="selectAll">Pilih</label>
                                             </div>
-                                        </th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No
                                         </th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kode
                                             Tagihan</th>
@@ -65,6 +65,13 @@
                                 <tbody>
                                     @foreach ($tagihan as $index => $item)
                                         <tr>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <h6 class="mb-0 text-sm">{{ $loop->iteration }}</h6>
+                                                    </div>
+                                                </div>
+                                            </td>
                                             <td class="ps-2">
                                                 <div class="d-flex px-2 py-1">
                                                     <div class="d-flex flex-column justify-content-center">
@@ -82,13 +89,6 @@
                                                         @else
                                                             <span class="text-muted">-</span>
                                                         @endif
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm">{{ $loop->iteration }}</h6>
                                                     </div>
                                                 </div>
                                             </td>
@@ -151,8 +151,21 @@
                                             <td>
                                                 <div class="d-flex px-2 py-1">
                                                     <div class="d-flex flex-column justify-content-center">
-                                                        <a href="{{ route("tagihan-spp.wali.detail", $item->id) }}"
+                                                        @if ($item->status == "lunas")
+                                                            @if (Str::startsWith($item->transaksi->kd_transaksi, 'MULTI'))
+                                                                <span class="badge badge-sm bg-gradient-info">Pembayaran Multiple</span>
+                                                                <a href="{{ route('tagihan-spp.wali.kwitansi-gabungan', $item->transaksi->kd_transaksi) }}"
+                                                                class="btn btn-sm btn-outline-primary mt-1">
+                                                                    Lihat Kwitansi
+                                                                </a>
+                                                            @else
+                                                                <a href="{{ route("tagihan-spp.kuitansi", $item->id) }}"
+                                                                    class="btn btn-sm btn-outline-primary">Kwitansi</a>
+                                                            @endif
+                                                        @else
+                                                            <a href="{{ route("tagihan-spp.wali.detail", $item->id) }}"
                                                             class="btn btn-sm btn-outline-success">Detail</a>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </td>
