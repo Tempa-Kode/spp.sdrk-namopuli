@@ -111,18 +111,21 @@
                         })
                         .then(response => response.json())
                         .then(data => {
+                            console.log('Status update response:', data);
                             if (data.success) {
                                 alert('Pembayaran berhasil!');
                                 window.location.href = data.redirect_url;
                             } else {
                                 alert(
-                                    'Pembayaran berhasil, namun terjadi kesalahan dalam pembaruan status. Silakan hubungi admin.');
+                                    'Pembayaran berhasil, namun terjadi kesalahan dalam pembaruan status. Silakan hubungi admin.'
+                                );
                             }
                         })
                         .catch(error => {
                             console.error('Error:', error);
                             alert(
-                                'Pembayaran berhasil, namun terjadi kesalahan dalam konfirmasi. Silakan hubungi admin.');
+                                'Pembayaran berhasil, namun terjadi kesalahan dalam konfirmasi. Silakan hubungi admin.'
+                            );
                         });
                 },
                 // Optional

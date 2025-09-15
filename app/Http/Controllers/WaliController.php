@@ -257,16 +257,14 @@ class WaliController extends Controller
         return view('tagihan-spp.wali.pembayaran-multiple', compact('snapToken', 'tagihanList', 'total'));
     }
 
-    public function kwitansiGabungan(Request $request)
+    public function kwitansiGabungan(Request $request, $transaksiId)
     {
-        $kodeTransaksi = $request->get('kd_transaksi');
-
-        if (!$kodeTransaksi) {
+        if (!$transaksiId) {
             return back()->with('error', 'Kode transaksi tidak valid.');
         }
 
         // Ambil SEMUA transaksi dengan kode yang sama
-        $semuaTransaksi = Transaksi::where('kd_transaksi', $kodeTransaksi)
+        $semuaTransaksi = Transaksi::where('kd_transaksi', $transaksiId)
                                 ->with(['tagihan.siswa', 'tagihan.tarif'])
                                 ->get();
 
@@ -332,8 +330,9 @@ class WaliController extends Controller
 
                     return response()->json([
                         'success' => true,
+                        'kd_transaksi' => $validated['kd_transaksi'],
                         'message' => 'Pembayaran berhasil dikonfirmasi',
-                        'redirect_url' => route('tagihan-spp.wali.kwitansi-gabungan') . '?kd_transaksi=' . $validated['kd_transaksi']
+                        'redirect_url' => route('tagihan-spp.wali.kwitansi-gabungan', $validated['kd_transaksi'])
                     ]);
                 }
             }

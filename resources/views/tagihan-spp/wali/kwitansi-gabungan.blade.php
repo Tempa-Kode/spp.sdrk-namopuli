@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Kuitansi SPP - {{ $transaksiUtama->tagihan->siswa->nama_siswa }}</title>
+    <title>Kuitansi SPP - {{ $transaksiPertama->tagihan->siswa->nama_siswa }}</title>
     <style>
         @page {
             size: A4;
@@ -404,7 +404,6 @@
         </div>
 
         <!-- Main Content -->
-        {{-- @dd($transaksiUtama) --}}
         <div class="content">
             <!-- Student Info and Amount -->
             <table class="content-table">
@@ -412,11 +411,11 @@
                     <td>
                         <div class="student-info">
                             <div class="section-title">Data Siswa</div>
-                            <div class="student-name">{{ $transaksiUtama->tagihan->siswa->nama_siswa }}</div>
+                            <div class="student-name">{{ $transaksiPertama->tagihan->siswa->nama_siswa }}</div>
                             <div class="student-detail"><strong>NISN:</strong>
-                                {{ $transaksiUtama->tagihan->siswa->nisn }}</div>
+                                {{ $transaksiPertama->tagihan->siswa->nisn }}</div>
                             <div class="student-detail"><strong>Kelas:</strong>
-                                {{ $transaksiUtama->tagihan->siswa->kelas->tingkat_kelas ?? "-" }}</div>
+                                {{ $transaksiPertama->tagihan->siswa->kelas->tingkat_kelas ?? "-" }}</div>
                         </div>
                     </td>
                     <td>
@@ -446,14 +445,14 @@
                 <tbody>
                     <tr>
                         <td class="detail-label">No. Kuitansi</td>
-                        <td class="detail-value">{{ $transaksiUtama->kd_transaksi }}</td>
+                        <td class="detail-value">{{ $transaksiPertama->kd_transaksi }}</td>
                     </tr>
                     <tr>
                         <td class="detail-label">Tanggal Pembayaran</td>
                         <td class="detail-value">
-                            {{ $transaksiUtama->tanggal_bayar instanceof \Carbon\Carbon
-                                ? $transaksiUtama->tanggal_bayar->locale("id")->translatedFormat("l, d F Y H:i:s")
-                                : \Carbon\Carbon::parse($transaksiUtama->tanggal_bayar)->locale("id")->translatedFormat("l, d F Y H:i:s") }}
+                            {{ $transaksiPertama->tanggal_bayar instanceof \Carbon\Carbon
+                                ? $transaksiPertama->tanggal_bayar->locale("id")->translatedFormat("l, d F Y H:i:s")
+                                : \Carbon\Carbon::parse($transaksiPertama->tanggal_bayar)->locale("id")->translatedFormat("l, d F Y H:i:s") }}
                         </td>
                     </tr>
                     <tr>
