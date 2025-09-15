@@ -91,7 +91,6 @@
             font-weight: bold;
             color: white;
         } */
-
         .invoice-number {
             font-size: 10px;
             color: rgba(255, 255, 255, 0.8);
@@ -292,11 +291,61 @@
             font-weight: bold;
             font-size: 11px;
         }
+
+        /* Stamp Lunas - Watermark */
+        .stamp-lunas {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            width: 400px;
+            height: 400px;
+            opacity: 0.15;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .stamp-lunas img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .invoice-container {
+            position: relative;
+        }
+
+        /* Print Styles */
+        @media print {
+            .stamp-lunas {
+                -webkit-print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+        }
     </style>
 </head>
 
 <body>
     <div class="invoice-container">
+        @if ($tagihan->status == "lunas")
+            <!-- Stamp Lunas -->
+            <div class="stamp-lunas">
+                @php
+                    $imagePath = public_path("assets/img/lunas.png");
+                    $imageData = "";
+                    if (file_exists($imagePath)) {
+                        $imageData = base64_encode(file_get_contents($imagePath));
+                        $src = "data:image/png;base64," . $imageData;
+                    } else {
+                        $src = "";
+                    }
+                @endphp
+                @if ($src)
+                    <img src="{{ $src }}" alt="LUNAS" />
+                @endif
+            </div>
+        @endif
+
         <!-- Header -->
         <div class="header">
             <table class="header-table">
@@ -404,7 +453,8 @@
         <div class="footer">
             <div class="footer-text">Terima kasih atas pembayaran yang tepat waktu</div>
             <div class="footer-text">Kuitansi ini adalah bukti pembayaran yang sah</div>
-            <div class="footer-contact">SD RK Namopuli | Dusun I Namopuli 	Desa	SUMBUL	KEC. STM HILIR	KAB. DELI SERDANG SUMATERA UTARA</div>
+            <div class="footer-contact">SD RK Namopuli | Dusun I Namopuli Desa SUMBUL KEC. STM HILIR KAB. DELI
+                SERDANG SUMATERA UTARA</div>
         </div>
     </div>
 </body>

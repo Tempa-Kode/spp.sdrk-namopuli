@@ -324,6 +324,29 @@
             font-size: 11px;
         }
 
+        /* Stamp Lunas - Watermark */
+        .stamp-lunas {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            width: 400px;
+            height: 400px;
+            opacity: 0.15;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .stamp-lunas img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .invoice-container {
+            position: relative;
+        }
+
         /* Print Styles */
         @media print {
 
@@ -334,6 +357,11 @@
             }
 
             body {
+                -webkit-print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
+            .stamp-lunas {
                 -webkit-print-color-adjust: exact !important;
                 color-adjust: exact !important;
             }
@@ -371,6 +399,23 @@
     </div>
 
     <div class="invoice-container">
+        <!-- Stamp Lunas -->
+        <div class="stamp-lunas">
+            @php
+                $imagePath = public_path("assets/img/lunas.png");
+                $imageData = "";
+                if (file_exists($imagePath)) {
+                    $imageData = base64_encode(file_get_contents($imagePath));
+                    $src = "data:image/png;base64," . $imageData;
+                } else {
+                    $src = "";
+                }
+            @endphp
+            @if ($src)
+                <img src="{{ $src }}" alt="LUNAS" />
+            @endif
+        </div>
+
         <!-- Header -->
         <div class="header">
             <table class="header-table">
