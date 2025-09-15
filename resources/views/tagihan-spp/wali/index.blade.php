@@ -30,7 +30,7 @@
                     </div>
                 @endif
 
-                @if ($tagihan->count() > 0)
+                @if ($groupedTagihan->count() > 0)
                     <form id="pembayaranForm" method="POST" action="">
                         @csrf
                         <div class="table-responsive p-0">
@@ -63,7 +63,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($tagihan as $index => $item)
+                                    @foreach ($groupedTagihan as $index => $item)
                                         <tr>
                                             <td>
                                                 <div class="d-flex px-2 py-1">
@@ -95,8 +95,16 @@
                                             <td>
                                                 <div class="d-flex px-2 py-1">
                                                     <div class="d-flex flex-column justify-content-center">
-                                                        <p class="text-xs text-secondary mb-0">
-                                                            {{ $item->kode_tagihan ?? "-" }}</p>
+                                                        @if (isset($item->is_grouped) && $item->is_grouped)
+                                                            <p class="text-xs text-secondary mb-0">
+                                                                {{ $item->transaksi->kd_transaksi ?? "-" }}
+                                                                <span
+                                                                    class="badge badge-sm bg-gradient-info ms-1">Multiple</span>
+                                                            </p>
+                                                        @else
+                                                            <p class="text-xs text-secondary mb-0">
+                                                                {{ $item->kode_tagihan ?? "-" }}</p>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </td>
@@ -121,18 +129,38 @@
                                             <td data-column="bulan">
                                                 <div class="d-flex px-2 py-1">
                                                     <div class="d-flex flex-column justify-content-center">
-                                                        <span class="badge badge-sm bg-gradient-info bulan-badge">
-                                                            {{ \Carbon\Carbon::createFromFormat("Y-m", $item->bulan)->locale("id")->translatedFormat("M Y") }}
-                                                        </span>
+                                                        @if (isset($item->is_grouped) && $item->is_grouped)
+                                                            <div class="badge-group">
+                                                                @foreach ($item->grouped_items as $groupItem)
+                                                                    <span
+                                                                        class="badge badge-sm bg-gradient-info bulan-badge">
+                                                                        {{ \Carbon\Carbon::createFromFormat("Y-m", $groupItem->bulan)->locale("id")->translatedFormat("M Y") }}
+                                                                    </span>
+                                                                @endforeach
+                                                            </div>
+                                                        @else
+                                                            <span class="badge badge-sm bg-gradient-info bulan-badge">
+                                                                {{ \Carbon\Carbon::createFromFormat("Y-m", $item->bulan)->locale("id")->translatedFormat("M Y") }}
+                                                            </span>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="d-flex px-2 py-1">
                                                     <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm">Rp
-                                                            {{ number_format($item->tarif->nominal ?? 0, 0, ",", ".") }}
-                                                        </h6>
+                                                        @if (isset($item->is_grouped) && $item->is_grouped)
+                                                            <h6 class="mb-0 text-sm">Rp
+                                                                {{ number_format($item->total_grouped_amount, 0, ",", ".") }}
+                                                            </h6>
+                                                            <p class="text-xs text-secondary mb-0">
+                                                                {{ $item->grouped_items->count() }} bulan
+                                                            </p>
+                                                        @else
+                                                            <h6 class="mb-0 text-sm">Rp
+                                                                {{ number_format($item->tarif->nominal ?? 0, 0, ",", ".") }}
+                                                            </h6>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </td>
@@ -141,6 +169,11 @@
                                                     <div class="d-flex flex-column justify-content-center">
                                                         @if ($item->status == "lunas")
                                                             <span class="badge badge-sm bg-gradient-success">Lunas</span>
+                                                            @if (isset($item->is_grouped) && $item->is_grouped)
+                                                                <small
+                                                                    class="text-muted mt-1">{{ $item->grouped_items->count() }}
+                                                                    tagihan</small>
+                                                            @endif
                                                         @else
                                                             <span class="badge badge-sm bg-gradient-warning">Belum
                                                                 Bayar</span>
@@ -152,11 +185,10 @@
                                                 <div class="d-flex px-2 py-1">
                                                     <div class="d-flex flex-column justify-content-center">
                                                         @if ($item->status == "lunas")
-                                                            @if (Str::startsWith($item->transaksi->kd_transaksi, 'MULTI'))
-                                                                <span class="badge badge-sm bg-gradient-info">Pembayaran Multiple</span>
-                                                                <a href="{{ route('tagihan-spp.wali.kwitansi-gabungan', $item->transaksi->kd_transaksi) }}"
-                                                                class="btn btn-sm btn-outline-primary mt-1">
-                                                                    Lihat Kwitansi
+                                                            @if (isset($item->is_grouped) && $item->is_grouped)
+                                                                <a href="{{ route("tagihan-spp.wali.kwitansi-gabungan", $item->transaksi->kd_transaksi) }}"
+                                                                    class="btn btn-sm btn-outline-primary mt-1">
+                                                                    Kwitansi
                                                                 </a>
                                                             @else
                                                                 <a href="{{ route("tagihan-spp.kuitansi", $item->id) }}"
@@ -164,7 +196,7 @@
                                                             @endif
                                                         @else
                                                             <a href="{{ route("tagihan-spp.wali.detail", $item->id) }}"
-                                                            class="btn btn-sm btn-outline-success">Detail</a>
+                                                                class="btn btn-sm btn-outline-success">Detail</a>
                                                         @endif
                                                     </div>
                                                 </div>
@@ -476,6 +508,17 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        /* Multiple badges styling */
+        .badge-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .badge-group .badge {
+            margin: 2px;
         }
     </style>
 @endsection

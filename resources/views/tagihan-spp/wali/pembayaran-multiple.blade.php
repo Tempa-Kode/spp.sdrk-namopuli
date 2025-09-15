@@ -113,7 +113,6 @@
                         .then(data => {
                             console.log('Status update response:', data);
                             if (data.success) {
-                                alert('Pembayaran berhasil!');
                                 window.location.href = data.redirect_url;
                             } else {
                                 alert(

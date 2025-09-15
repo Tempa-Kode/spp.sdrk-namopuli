@@ -56,7 +56,52 @@ class WaliController extends Controller
             ->with('siswa', 'tarif', 'transaksi')
             ->orderBy('bulan', 'desc')
             ->get();
-        return view('tagihan-spp.wali.index', compact('tagihan'));
+
+        // Group tagihan berdasarkan kd_transaksi untuk yang sudah lunas
+        $groupedTagihan = collect();
+        $processedTransactionIds = [];
+
+        foreach ($tagihan as $item) {
+            // Jika status lunas dan memiliki transaksi dengan kd_transaksi
+            if ($item->status === 'lunas' && $item->transaksi && $item->transaksi->kd_transaksi) {
+                $kdTransaksi = $item->transaksi->kd_transaksi;
+
+                // Jika kd_transaksi sudah diproses, skip
+                if (in_array($kdTransaksi, $processedTransactionIds)) {
+                    continue;
+                }
+
+                // Cari semua tagihan dengan kd_transaksi yang sama
+                $tagihanGroup = $tagihan->filter(function($tagihan) use ($kdTransaksi) {
+                    return $tagihan->status === 'lunas' &&
+                           $tagihan->transaksi &&
+                           $tagihan->transaksi->kd_transaksi === $kdTransaksi;
+                });
+
+                if ($tagihanGroup->count() > 1) {
+                    // Buat object gabungan untuk multiple payment
+                    $representative = $tagihanGroup->first();
+                    $representative->is_grouped = true;
+                    $representative->grouped_items = $tagihanGroup;
+                    $representative->total_grouped_amount = $tagihanGroup->sum(function($t) {
+                        return $t->tarif->nominal ?? 0;
+                    });
+
+                    $groupedTagihan->push($representative);
+                    $processedTransactionIds[] = $kdTransaksi;
+                } else {
+                    // Single payment
+                    $item->is_grouped = false;
+                    $groupedTagihan->push($item);
+                }
+            } else {
+                // Tagihan belum lunas atau tidak memiliki transaksi
+                $item->is_grouped = false;
+                $groupedTagihan->push($item);
+            }
+        }
+
+        return view('tagihan-spp.wali.index', compact('groupedTagihan'));
     }
 
     public function detailTagihan($id)
