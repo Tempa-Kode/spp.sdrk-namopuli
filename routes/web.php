@@ -75,6 +75,11 @@ Route::prefix('/tarif-spp')->middleware('auth')->group(function () {
 
 Route::prefix('/tagihan-spp')->middleware('auth')->group(function () {
     Route::get('/wali', [App\Http\Controllers\WaliController::class, 'tagihan'])->name('tagihan-spp.wali');
+    Route::post('/wali/buat', [App\Http\Controllers\WaliController::class, 'buatTagihan'])->name('tagihan-spp.wali.buat');
+    Route::post('/wali/bayar-multiple', [App\Http\Controllers\WaliController::class, 'bayarMultiple'])->name('tagihan-spp.wali.bayar-multiple');
+    Route::get('/wali/pembayaran-multiple', [App\Http\Controllers\WaliController::class, 'pembayaranMultiple'])->name('tagihan-spp.wali.pembayaran-multiple');
+    Route::post('/wali/update-status-multiple', [App\Http\Controllers\WaliController::class, 'updateStatusMultiple'])->name('tagihan-spp.wali.update-status-multiple');
+    Route::get('/wali/kwitansi-gabungan/{transaksiId}', [App\Http\Controllers\WaliController::class, 'kwitansiGabungan'])->name('tagihan-spp.wali.kwitansi-gabungan');
     Route::post('/bayar', [App\Http\Controllers\PembayaranController::class, 'bayar'])->name('tagihan-spp.bayar');
     Route::put('/update-status', [App\Http\Controllers\PembayaranController::class, 'updateStatus'])->name('tagihan-spp.update-status.pembayaran');
     Route::get('/detail/{id}', [App\Http\Controllers\WaliController::class, 'detailTagihan'])->name('tagihan-spp.wali.detail');
