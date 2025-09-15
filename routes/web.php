@@ -92,7 +92,13 @@ Route::prefix('/tagihan-spp')->middleware('auth')->group(function () {
 });
 
 Route::prefix('/reports')->middleware('auth')->group(function () {
+    // Report Tagihan SPP Bulanan/Periode
     Route::get('/tagihan-spp', [App\Http\Controllers\ReportController::class, 'tagihanSpp'])->name('reports.tagihan-spp');
     Route::get('/tagihan-spp/preview', [App\Http\Controllers\ReportController::class, 'previewTagihanSpp'])->name('reports.tagihan-spp.preview');
     Route::get('/tagihan-spp/pdf', [App\Http\Controllers\ReportController::class, 'generateTagihanSppPdf'])->name('reports.tagihan-spp.pdf');
+
+    // Report Tagihan SPP Tahunan
+    Route::get('/tagihan-spp-tahunan', [App\Http\Controllers\ReportController::class, 'tagihanSppTahunan'])->name('reports.tagihan-spp-tahunan');
+    Route::get('/tagihan-spp-tahunan/preview', [App\Http\Controllers\ReportController::class, 'previewTagihanSppTahunan'])->name('reports.tagihan-spp-tahunan.preview');
+    Route::get('/tagihan-spp-tahunan/pdf', [App\Http\Controllers\ReportController::class, 'generateTagihanSppTahunanPdf'])->name('reports.tagihan-spp-tahunan.pdf');
 });

@@ -1,48 +1,43 @@
 @extends("template")
-@section("title", "Laporan Tagihan SPP")
-@section("page", "Laporan Tagihan SPP")
+@section("title", "Laporan Tagihan SPP Tahunan")
+@section("page", "Laporan Tagihan SPP Tahunan")
 @section("body")
     <div class="col-12">
         <!-- Filter Section -->
         <div class="card mb-4">
             <div class="card-header pb-0">
-                <h6 class="mb-0">Filter Laporan Tagihan SPP</h6>
+                <h6 class="mb-0">Filter Laporan Tagihan SPP Tahunan</h6>
             </div>
             <div class="card-body">
-                <form method="GET" action="{{ route("reports.tagihan-spp.preview") }}" id="filterForm">
+                <form method="GET" action="{{ route("reports.tagihan-spp-tahunan.preview") }}" id="filterForm">
                     <div class="row">
-                        @can('filter-data')
-                        <div class="col-md-3">
+                        @can("filter-data")
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="kelas_id" class="form-label">Kelas</label>
+                                    <select class="form-select" id="kelas_id" name="kelas_id">
+                                        <option value="">Semua Kelas</option>
+                                        @foreach ($kelasList as $kelas)
+                                            <option value="{{ $kelas->id }}"
+                                                {{ request("kelas_id") == $kelas->id ? "selected" : "" }}>
+                                                Kelas {{ $kelas->tingkat_kelas }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        @endcan
+                        <div class="col-md-4">
                             <div class="mb-3">
-                                <label for="kelas_id" class="form-label">Kelas</label>
-                                <select class="form-select" id="kelas_id" name="kelas_id">
-                                    <option value="">Semua Kelas</option>
-                                    @foreach ($kelasList as $kelas)
-                                        <option value="{{ $kelas->id }}"
-                                            {{ request("kelas_id") == $kelas->id ? "selected" : "" }}>
-                                            Kelas {{ $kelas->tingkat_kelas }}
+                                <label for="tahun" class="form-label">Tahun <span class="text-danger">*</span></label>
+                                <select class="form-select" id="tahun" name="tahun" required>
+                                    <option value="">Pilih Tahun</option>
+                                    @foreach ($tahunList as $tahun)
+                                        <option value="{{ $tahun }}"
+                                            {{ request("tahun") == $tahun ? "selected" : "" }}>
+                                            {{ $tahun }}
                                         </option>
                                     @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        @endcan
-                        <div class="col-md-3">
-                            <div class="mb-3">
-                                <label for="bulan" class="form-label">Bulan</label>
-                                <input type="month" class="form-control" id="bulan" name="bulan"
-                                    value="{{ request("bulan") }}">
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="mb-3">
-                                <label for="status" class="form-label">Status</label>
-                                <select class="form-select" id="status" name="status">
-                                    <option value="">Semua Status</option>
-                                    <option value="belum_bayar" {{ request("status") == "belum_bayar" ? "selected" : "" }}>
-                                        Belum Bayar</option>
-                                    <option value="lunas" {{ request("status") == "lunas" ? "selected" : "" }}>Lunas
-                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -54,7 +49,7 @@
                         <button type="button" class="btn btn-success" onclick="generatePDF()">
                             <i class="fas fa-file-pdf"></i> Download PDF
                         </button>
-                        <a href="{{ route("reports.tagihan-spp") }}" class="btn btn-outline-secondary">
+                        <a href="{{ route("reports.tagihan-spp-tahunan") }}" class="btn btn-outline-secondary">
                             <i class="fas fa-undo"></i> Reset
                         </a>
                     </div>
@@ -105,7 +100,8 @@
                                 </div>
                                 <div class="ms-3">
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Lunas</p>
-                                    <h5 class="font-weight-bolder mb-0">{{ $tagihan->where("status", "lunas")->count() }}
+                                    <h5 class="font-weight-bolder mb-0">
+                                        {{ isset($tagihan) ? $tagihan->where("status", "lunas")->count() : 0 }}
                                     </h5>
                                 </div>
                             </div>
@@ -122,7 +118,7 @@
                                 <div class="ms-3">
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Belum Bayar</p>
                                     <h5 class="font-weight-bolder mb-0">
-                                        {{ $tagihan->where("status", "belum_bayar")->count() }}</h5>
+                                        {{ isset($tagihan) ? $tagihan->where("status", "belum_bayar")->count() : 0 }}</h5>
                                 </div>
                             </div>
                         </div>
@@ -136,7 +132,7 @@
             <div class="card">
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h6 class="mb-0">Data Tagihan SPP</h6>
+                        <h6 class="mb-0">Data Tagihan SPP Tahun {{ request("tahun") }}</h6>
                         @if ($tagihan->count() > 0)
                             <button type="button" class="btn btn-success btn-sm" onclick="generatePDF()">
                                 <i class="fas fa-file-pdf"></i> Download PDF
@@ -228,7 +224,6 @@
                                 </tbody>
                             </table>
                         </div>
-
                     @else
                         <div class="text-center py-4">
                             <i class="fas fa-search text-muted" style="font-size: 3rem;"></i>
@@ -241,10 +236,10 @@
         @else
             <div class="card">
                 <div class="card-body text-center py-5">
-                    <i class="fas fa-chart-bar text-muted" style="font-size: 4rem;"></i>
-                    <h5 class="text-muted mt-3">Laporan Tagihan SPP</h5>
-                    <p class="text-muted">Gunakan filter di atas untuk melihat data tagihan SPP dan mengunduh laporan PDF.
-                    </p>
+                    <i class="fas fa-chart-line text-muted" style="font-size: 4rem;"></i>
+                    <h5 class="text-muted mt-3">Laporan Tagihan SPP Tahunan</h5>
+                    <p class="text-muted">Pilih tahun dan filter yang diinginkan untuk melihat data tagihan SPP per tahun
+                        dan mengunduh laporan PDF dengan analisis bulanan.</p>
                 </div>
             </div>
         @endif
@@ -256,13 +251,20 @@
             const formData = new FormData(form);
             const params = new URLSearchParams();
 
+            // Validasi tahun harus dipilih
+            const tahun = formData.get('tahun');
+            if (!tahun) {
+                alert('Silakan pilih tahun terlebih dahulu!');
+                return;
+            }
+
             for (let [key, value] of formData.entries()) {
                 if (value) {
                     params.append(key, value);
                 }
             }
 
-            const url = "{{ route("reports.tagihan-spp.pdf") }}" + '?' + params.toString();
+            const url = "{{ route("reports.tagihan-spp-tahunan.pdf") }}" + '?' + params.toString();
             window.open(url, '_blank');
         }
     </script>
