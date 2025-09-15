@@ -44,7 +44,7 @@
                                 <form action="{{ route('login.post') }}" role="form" method="post">
                                     @csrf
                                     @method('POST')
-                                    <label>NISN/NUPTK</label>
+                                    <label>NISN/NUPTK/EMAIL</label>
                                     <div class="mb-3">
                                         <input type="text" class="form-control" name="kridensial" placeholder="NISN/NUPTK" aria-label="Email" aria-describedby="email-addon">
                                     </div>
@@ -62,7 +62,7 @@
                     <div class="col-md-6">
                         <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">
                             {{-- <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('../assets/img/curved-images/curved6.jpg')"></div> --}}
-                            <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('../landing/img/hero-image.svg'); background-size: contain; background-repeat: no-repeat; background-position: 10% 50% ;"></div>
+                            <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('../landing/img/hero-image.svg'); background-size: contain; background-repeat: no-repeat; background-position: 20% 50% ;"></div>
                         </div>
                     </div>
                 </div>
