@@ -22,9 +22,9 @@ class DataDummy2024Seeder extends Seeder
 
         // Array bulan untuk tahun 2024
         $bulanList = [
-            '2024-01', '2024-02', '2024-03', '2024-04',
-            '2024-05', '2024-06', '2024-07', '2024-08',
-            '2024-09', '2024-10', '2024-11', '2024-12'
+            '2024-07', '2024-08',
+            '2024-09', '2024-10',
+            '2024-11', '2024-12'
         ];
 
         foreach ($siswa as $item) {
@@ -36,7 +36,6 @@ class DataDummy2024Seeder extends Seeder
                 continue;
             }
 
-            // Buat transaksi untuk setiap bulan
             // Buat transaksi untuk setiap bulan
             foreach ($bulanList as $bulan) {
                 $kodeRandom = random_int(100, 999);

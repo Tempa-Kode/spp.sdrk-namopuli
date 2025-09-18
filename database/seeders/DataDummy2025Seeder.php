@@ -22,8 +22,9 @@ class DataDummy2025Seeder extends Seeder
 
         // Array bulan untuk tahun 2024
         $bulanList = [
-            '2025-01', '2025-02', '2025-03', '2025-04',
-            '2025-05', '2025-06', '2025-07', '2025-08'
+            '2025-01', '2025-02',
+            '2025-03', '2025-04',
+            '2025-05', '2025-06'
         ];
 
         foreach ($siswa as $item) {
