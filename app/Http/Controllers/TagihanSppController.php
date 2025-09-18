@@ -34,8 +34,8 @@ class TagihanSppController extends Controller
 
         // Filter berdasarkan kelas
         if ($request->filled('kelas_id')) {
-            $query->whereHas('siswa', function($q) use ($request) {
-                $q->where('kelas_id', $request->kelas_id);
+            $query->whereHas('tarif', function($q) use ($request) {
+                $q->where('tingkat_kelas', $request->kelas_id);
             });
         }
 

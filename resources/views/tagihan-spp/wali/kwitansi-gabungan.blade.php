@@ -459,8 +459,8 @@
                             <div class="student-name">{{ $transaksiPertama->tagihan->siswa->nama_siswa }}</div>
                             <div class="student-detail"><strong>NISN:</strong>
                                 {{ $transaksiPertama->tagihan->siswa->nisn }}</div>
-                            <div class="student-detail"><strong>Kelas:</strong>
-                                {{ $transaksiPertama->tagihan->siswa->kelas->tingkat_kelas ?? "-" }}</div>
+                            {{-- <div class="student-detail"><strong>Kelas:</strong>
+                                {{ $transaksiPertama->tagihan->siswa->kelas->tingkat_kelas ?? "-" }}</div> --}}
                         </div>
                     </td>
                     <td>

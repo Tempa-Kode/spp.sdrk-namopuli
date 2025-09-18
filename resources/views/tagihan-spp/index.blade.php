@@ -44,11 +44,17 @@
                     <div class="col-md-3">
                             <select name="kelas_id" class="form-select" onchange="document.getElementById('filterForm').submit()">
                                 <option value="">Semua Kelas</option>
-                                @foreach($kelasList as $kelas)
+                                <option value="1" {{ request('kelas_id') == 1 ? 'selected' : '' }}>Kelas 1</option>
+                                <option value="2" {{ request('kelas_id') == 2 ? 'selected' : '' }}>Kelas 2</option>
+                                <option value="3" {{ request('kelas_id') == 3 ? 'selected' : '' }}>Kelas 3</option>
+                                <option value="4" {{ request('kelas_id') == 4 ? 'selected' : '' }}>Kelas 4</option>
+                                <option value="5" {{ request('kelas_id') == 5 ? 'selected' : '' }}>Kelas 5</option>
+                                <option value="6" {{ request('kelas_id') == 6 ? 'selected' : '' }}>Kelas 6</option>
+                                {{-- @foreach($kelasList as $kelas)
                                     <option value="{{ $kelas->id }}" {{ request('kelas_id') == $kelas->id ? 'selected' : '' }}>
                                         Kelas {{ $kelas->tingkat_kelas }}
                                     </option>
-                                @endforeach
+                                @endforeach --}}
                             </select>
                     </div>
                     @endcan
