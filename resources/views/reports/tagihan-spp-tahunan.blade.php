@@ -17,12 +17,18 @@
                                     <label for="kelas_id" class="form-label">Kelas</label>
                                     <select class="form-select" id="kelas_id" name="kelas_id">
                                         <option value="">Semua Kelas</option>
-                                        @foreach ($kelasList as $kelas)
+                                        <option value="1">Kelas 1</option>
+                                        <option value="2">Kelas 2</option>
+                                        <option value="3">Kelas 3</option>
+                                        <option value="4">Kelas 4</option>
+                                        <option value="5">Kelas 5</option>
+                                        <option value="6">Kelas 6</option>
+                                        {{-- @foreach ($kelasList as $kelas)
                                             <option value="{{ $kelas->id }}"
                                                 {{ request("kelas_id") == $kelas->id ? "selected" : "" }}>
                                                 Kelas {{ $kelas->tingkat_kelas }}
                                             </option>
-                                        @endforeach
+                                        @endforeach --}}
                                     </select>
                                 </div>
                             </div>
@@ -184,7 +190,7 @@
                                                 <div class="d-flex px-2 py-1">
                                                     <div class="d-flex flex-column justify-content-center">
                                                         <p class="text-xs text-secondary mb-0">
-                                                            Kelas {{ $item->siswa->kelas->tingkat_kelas ?? "-" }}
+                                                            {{ $item->tarif->tingkat_kelas ? "Kelas {$item->tarif->tingkat_kelas}" : '-' }}
                                                         </p>
                                                     </div>
                                                 </div>

@@ -361,7 +361,7 @@
                         <td class="text-center">{{ $index + 1 }}</td>
                         <td>{{ $item->siswa->nama_siswa ?? "-" }}</td>
                         <td>{{ $item->siswa->nisn ?? "-" }}</td>
-                        <td>{{ $item->siswa->kelas->tingkat_kelas ?? "-" }}</td>
+                        <td>{{ $item->tarif->tingkat_kelas ? "Kelas {$item->tarif->tingkat_kelas}" : '-' }}</td>
                         <td>{{ \Carbon\Carbon::createFromFormat("Y-m", $item->bulan)->format("M") }}</td>
                         <td class="text-right">Rp {{ number_format($item->tarif->nominal ?? 0, 0, ",", ".") }}</td>
                         <td class="text-center">

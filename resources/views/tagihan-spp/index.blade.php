@@ -120,7 +120,7 @@
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <p class="text-xs text-secondary mb-0">
-                                                        {{ $item->siswa->kelas ? "Kelas {$item->siswa->kelas->tingkat_kelas}" : '-' }}
+                                                        {{ $item->tarif->tingkat_kelas ? "Kelas {$item->tarif->tingkat_kelas}" : '-' }}
                                                     </p>
                                                 </div>
                                             </div>
