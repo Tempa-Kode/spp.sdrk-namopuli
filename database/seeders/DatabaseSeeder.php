@@ -24,5 +24,8 @@ class DatabaseSeeder extends Seeder
             "password" => bcrypt("admin123"),
             "role" => "admin",
         ]);
+
+        $this->call(DataDummy2024Seeder::class);
+        $this->call(DataDummy2025Seeder::class);
     }
 }
