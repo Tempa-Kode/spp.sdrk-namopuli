@@ -27,5 +27,6 @@ class DatabaseSeeder extends Seeder
 
         $this->call(DataDummy2024Seeder::class);
         $this->call(DataDummy2025Seeder::class);
+        $this->call(DataDummyTABaruSeeer::class);
     }
 }
