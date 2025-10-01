@@ -7,12 +7,14 @@
             <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                 <h6 class="mb-0">Daftar Tagihan SPP</h6>
                 <div class="d-flex gap-2">
-                    @if(!$currentMonthTagihan || $currentMonthTagihanCount < $jumlahSiswa)
-                        <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#generateModal">
-                            <i class="fas fa-plus-circle"></i> Buat Tagihan Bulan Ini
-                        </button>
-                    @endif
-                    @if (Auth::user()->role != 'wali' && Auth::user()->role != 'wali_kelas')
+                    @if (Auth::user()->role !== 'wali' &&
+                        Auth::user()->role !== 'wali_kelas' &&
+                        (!Auth::user()->petugas || Auth::user()->petugas->jabatan !== 'Kepala Sekolah'))
+                        @if(!$currentMonthTagihan || $currentMonthTagihanCount < $jumlahSiswa)
+                            <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#generateModal">
+                                <i class="fas fa-plus-circle"></i> Buat Tagihan Bulan Ini
+                            </button>
+                        @endif
                         <a href="{{ route('tagihan-spp.create') }}" class="btn btn-primary btn-sm">
                             <i class="fas fa-plus"></i> Tambah Manual
                         </a>
