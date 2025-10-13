@@ -145,6 +145,10 @@
                                     <thead>
                                         <tr>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                Tanggal & Waktu</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                Kode Tagihan</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 Siswa</th>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 Kelas</th>
@@ -154,13 +158,29 @@
                                                 Nominal</th>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 Status</th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Tanggal Update</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($transaksiTerbaru as $item)
                                             <tr>
+                                                <td>
+                                                    <div class="d-flex px-2 py-1">
+                                                        <div class="d-flex flex-column justify-content-center">
+                                                            <h6 class="mb-0 text-sm">
+                                                                {{ $item->created_at->format("d M Y H:i") }}
+                                                            </h6>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex px-2 py-1">
+                                                        <div class="d-flex flex-column justify-content-center">
+                                                            <h6 class="mb-0 text-sm">
+                                                                {{ $item->transaksi->kd_transaksi }}
+                                                            </h6>
+                                                        </div>
+                                                    </div>
+                                                </td>
                                                 <td>
                                                     <div class="d-flex px-2 py-1">
                                                         <div class="d-flex flex-column justify-content-center">
@@ -201,15 +221,6 @@
                                                     <div class="d-flex px-2 py-1">
                                                         <div class="d-flex flex-column justify-content-center">
                                                             <span class="badge badge-sm bg-gradient-success">Lunas</span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex px-2 py-1">
-                                                        <div class="d-flex flex-column justify-content-center">
-                                                            <p class="text-xs text-secondary mb-0">
-                                                                {{ $item->updated_at->format("d M Y H:i") }}
-                                                            </p>
                                                         </div>
                                                     </div>
                                                 </td>
