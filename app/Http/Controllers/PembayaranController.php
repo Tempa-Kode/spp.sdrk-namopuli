@@ -124,6 +124,9 @@ class PembayaranController extends Controller
                     'status' => 'lunas'
                 ]);
             } else {
+                $transaksi->tipe_pembayaran = $data['payment_type'];
+                $transaksi->save();
+
                 $transaksi->tagihan->status = 'belum_bayar';
                 $transaksi->tagihan->save();
 

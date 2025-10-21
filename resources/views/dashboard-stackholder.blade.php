@@ -157,6 +157,8 @@
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 Nominal</th>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                Channel</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 Status</th>
                                         </tr>
                                     </thead>
@@ -213,6 +215,15 @@
                                                         <div class="d-flex flex-column justify-content-center">
                                                             <h6 class="mb-0 text-sm">Rp
                                                                 {{ number_format($item->tarif->nominal ?? 0, 0, ",", ".") }}
+                                                            </h6>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex px-2 py-1">
+                                                        <div class="d-flex flex-column justify-content-center">
+                                                            <h6 class="mb-0 text-sm">
+                                                                {{ $item->transaksi->tipe_pembayaran == 'bank_transfer' ? 'Bank Transfer' : '-' }}
                                                             </h6>
                                                         </div>
                                                     </div>

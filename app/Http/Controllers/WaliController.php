@@ -214,7 +214,7 @@ class WaliController extends Controller
             }
 
             // Generate kode transaksi gabungan SATU untuk semua
-            $kodeTransaksiGabungan = 'MULTI-' . now()->format('YmdHis') . '-' . $siswaId;
+            $kodeTransaksiGabungan = 'NAMOPULI-' . now()->format('YmdHis') . '-' . $siswaId;
 
             // Hitung total
             $totalBayar = $tagihanList->sum(fn($t) => $t->tarif->nominal ?? 0);
@@ -251,7 +251,7 @@ class WaliController extends Controller
                 ],
                 'item_details' => [
                     [
-                        'id' => 'SPP-MULTIPLE',
+                        'id' => 'SPP-NAMOPULI',
                         'price' => $totalBayar,
                         'quantity' => 1,
                         'name' => 'Pembayaran SPP Multiple Bulan (' . $bulanList . ')',
@@ -367,6 +367,9 @@ class WaliController extends Controller
                     $transaksiList = Transaksi::where('kd_transaksi', $validated['kd_transaksi'])->get();
 
                     foreach ($transaksiList as $transaksi) {
+                        $transaksi->tipe_pembayaran = $data['payment_type'];
+                        $transaksi->save();
+                        
                         $transaksi->tagihan->status = 'lunas';
                         $transaksi->tagihan->save();
                     }

@@ -14,6 +14,7 @@ class Transaksi extends Model
         'jumlah_bayar',
         'tanggal_bayar',
         'snap_token',
+        'tipe_pembayaran',
         'transaksi_gabungan_id',
     ];
 
